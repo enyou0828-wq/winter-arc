@@ -143,13 +143,30 @@ td.n { font-family: var(--f-mono); white-space: nowrap; color: var(--muted); }
 .wtop .r { display: flex; gap: 12px; align-items: center; font-size: 13px; color: var(--muted); }
 .exam-toggle { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
 .exam-toggle input { accent-color: var(--warn); }
-.fields { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.fields { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
 @media (max-width: 760px) { .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .fields label { display: grid; gap: 4px; font-size: 12px; color: var(--muted); min-width: 0; }
 .fields input, .wcard textarea { font: inherit; font-size: 14px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; width: 100%; min-width: 0; }
 .fields input { font-family: var(--f-mono); }
 .wcard textarea { resize: vertical; min-height: 54px; }
 .wcard .reviewlbl { font-size: 12px; color: var(--muted); display: grid; gap: 4px; }
+.readset { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+input.num { font: inherit; font-family: var(--f-mono); font-size: 14px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 5px 8px; width: 5.5em; }
+.addbook { display: flex; flex-wrap: wrap; gap: 8px; }
+.addbook input { font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; min-width: 0; }
+.addbook #bk-title { flex: 1 1 200px; }
+.addbook button, .bk-del { font: inherit; font-size: 14px; border-radius: 6px; padding: 6px 14px; cursor: pointer; border: 1px solid var(--accent); background: var(--accent); color: var(--surface); }
+.bk-del { background: none; color: var(--muted); border-color: var(--line); padding: 3px 10px; font-size: 12px; white-space: nowrap; }
+.bk-del.arm { color: var(--warn); border-color: var(--warn); }
+.pbar { height: 6px; border-radius: 3px; background: var(--cell-0); overflow: hidden; margin-top: 7px; }
+.pbar i { display: block; height: 100%; background: var(--accent); }
+.checks .readrow { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; margin-top: 6px; font-size: 13px; color: var(--muted); }
+.checks .readrow label { display: inline; padding: 0; cursor: default; white-space: nowrap; }
+.checks .readrow span { white-space: nowrap; }
+.checks select { font: inherit; font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; max-width: 100%; min-width: 0; }
+.checks .readmark { width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid var(--muted); margin-top: 3px; display: grid; place-items: center; font-size: 12px; color: var(--surface); }
+.checks .readmark.on { background: var(--accent); border-color: var(--accent); }
+.checks .readli { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 12px 14px; }
 footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
 @media (prefers-reduced-motion: no-preference) { .bar i { transition: width .3s ease; } }
 </style>
@@ -235,7 +252,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
             <li>保養照常（A醇每晚），只暫停杏仁酸。步數降到 7,000，取消額外有氧。</li>
             <li>熱量回到維持（diet break），體重照量、飲食照記。</li>
             <li>程式每天 15 分鐘，只複習，不學新章節。</li>
-            <li>閱讀改成睡前 15 分鐘；交易只做盤後紀錄，部位減半或空手。</li>
+            <li>閱讀頁數目標減半；交易只做盤後紀錄，部位減半或空手。</li>
             <li>這一週照考試週版本做完就算達標，不算中斷。</li>
           </ul>
         </div>
@@ -436,19 +453,22 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
       </section>
 
       <section class="area" id="p-read">
-        <div class="area-head"><h2>閱讀</h2><span class="muted">每天 30 分鐘讀紙本，睡前不滑手機</span></div>
-        <div class="kpi"><span>4 本，挑戰 5 本</span><span>約 1,500 頁</span><span>每週 1 篇閱讀筆記，共 12 篇</span><span>每月 1 篇 1,500 字長文</span></div>
+        <div class="area-head"><h2>閱讀</h2><span class="muted">讀自己的書，以頁數計算，睡前不滑手機</span></div>
+        <div class="kpi" id="readKpi"></div>
+        <div class="readset">
+          <label for="bk-target">每日目標 <input id="bk-target" class="num" inputmode="numeric" autocomplete="off"> 頁</label>
+          <span class="note">考試週自動減半。</span>
+        </div>
         <div class="tbl"><table>
-          <thead><tr><th>期間</th><th>書</th><th>為什麼選這本</th></tr></thead>
-          <tbody>
-            <tr><td class="n">W1–W3</td><td>《被討厭的勇氣》</td><td>對應「減少反覆自我評價」和人際焦慮，對話體，好讀。</td></tr>
-            <tr><td class="n">W4–W6</td><td>《交易心理分析》（Mark Douglas）</td><td>對應交易紀律，跟每週復盤一起讀。</td></tr>
-            <tr><td class="n">W7–W8</td><td>《活出意義來》（Frankl）</td><td>篇幅短，剛好接在期中考後。</td></tr>
-            <tr><td class="n">W9–W12</td><td>《快思慢想》（Kahneman）</td><td>最硬的一本。講判斷偏誤，直接對應交易和臨床判斷。</td></tr>
-            <tr><td class="n">挑戰</td><td>《原子習慣》</td><td>前四本提早讀完再讀。</td></tr>
-          </tbody>
+          <thead><tr><th>書名</th><th>總頁數</th><th>已讀</th><th style="width:30%">進度</th><th></th></tr></thead>
+          <tbody id="bookRows"></tbody>
         </table></div>
-        <p class="note">每週筆記格式：3 個重點、1 個不同意或有疑問的地方、1 個下週要做的行動。月底長文（10/31、11/30、12/31）：挑當月一本書的一個觀點，寫自己同不同意、為什麼。考試週改成睡前 15 分鐘。</p>
+        <form class="addbook" id="addBook">
+          <input id="bk-title" placeholder="書名" autocomplete="off" required>
+          <input id="bk-total" class="num" placeholder="總頁數" inputmode="numeric" autocomplete="off">
+          <button type="submit">加入書單</button>
+        </form>
+        <p class="note">每天在打卡頁輸入讀了幾頁，會算進當天選的那本書；達到每日目標就算完成。書單照加入順序讀，讀完一本會自動換下一本。每週筆記格式：3 個重點、1 個不同意或有疑問的地方、1 個下週要做的行動。月底長文（10/31、11/30、12/31）：挑當月一本書的一個觀點，寫自己同不同意、為什麼。</p>
       </section>
     </div>
   </div>
@@ -525,27 +545,40 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
     if (MONTH_END[date]) it.push({ k: "monthly", t: "月報＋1,500 字閱讀長文", s: "交易月報：損益、R、規則遵守率；長文：當月一本書的一個觀點", tag: "交易" });
     if ((wd === 0 || wd === 2 || wd === 5) && !exam) it.push({ k: "ootd", t: "拍 1 張 OOTD", s: styleTask(w), tag: "穿搭" });
     if (wd === 6) it.push({ k: "groom", t: "儀容整理", s: "修眉、指甲、鼻毛、鞋子保養、燙好下週襯衫", tag: "穿搭" });
-    it.push({ k: "read", t: exam ? "閱讀 15 分鐘" : "閱讀 30 分鐘", s: bookOf(w) + (wd === 6 ? " · 今天寫閱讀筆記" : ""), tag: "閱讀" });
+    it.push({ k: "read", pages: true, target: pageTarget(exam), t: "閱讀 " + pageTarget(exam) + " 頁", s: wd === 6 ? "今天寫閱讀筆記" : "", tag: "閱讀" });
     return it;
   }
   var CODE = ["", "CS50P L0–1 · 函式、變數、條件", "CS50P L2–3 · 迴圈、例外", "CS50P L4–5 · 函式庫、單元測試", "CS50P L6–7 · 檔案、正規表達式", "CS50P L8–9 · 物件導向", "Big-O、list、stack、queue", "Linked list、hash table", "遞迴、排序、二分搜尋", "Tree、BST、走訪", "Heap、graph、BFS/DFS", "專案：pandas 回測", "專案收尾、README、GitHub"];
   function codeTopic(w) { return "本週：" + CODE[w]; }
-  function bookOf(w) { return w <= 3 ? "《被討厭的勇氣》" : w <= 6 ? "《交易心理分析》" : w <= 8 ? "《活出意義來》" : "《快思慢想》"; }
+  // ---- books (user's own list, counted in pages) ----
+  function books() {
+    if (!state.books || typeof state.books !== "object") state.books = { target: 20, list: [] };
+    if (!Array.isArray(state.books.list)) state.books.list = [];
+    if (!(+state.books.target > 0)) state.books.target = 20;
+    return state.books;
+  }
+  function pageTarget(exam) { var t = +books().target; return exam ? Math.ceil(t / 2) : t; }
+  function eachDayRec(fn) { for (var i = 0; i < N; i++) { var r = wk(weekOfIdx(i)).days[DAYS[i]]; if (r) fn(r, i); } }
+  function pagesOfBook(id) { var s = 0; eachDayRec(function (r) { if (r.book === id) s += +r.pages || 0; }); return s; }
+  function pagesTotal() { var s = 0; eachDayRec(function (r) { s += +r.pages || 0; }); return s; }
+  function pagesInWeek(w) { var s = 0, d = wk(w).days; Object.keys(d).forEach(function (k) { s += +d[k].pages || 0; }); return s; }
+  function bookDone(b) { return +b.total > 0 && pagesOfBook(b.id) >= +b.total; }
+  function currentBook() { var l = books().list; for (var i = 0; i < l.length; i++) if (!bookDone(l[i])) return l[i]; return l[l.length - 1] || null; }
   var STYLE = ["", "存 50 張參考圖、盤點衣櫃", "剪好捲髮髮型、練捲髮乳", "補襯衫、針織", "補褲子、修褲長", "補外套", "補鞋，膠囊衣櫥補齊", "找出比例問題並修正", "找出比例問題並修正", "西裝外套或 blazer", "香水、錶", "整理到 15 套組合", "拍成果照"];
   function styleTask(w) { return "本週：" + STYLE[w]; }
   var FOCUS = {
-    1: ["測深蹲 5RM、硬舉 3RM、量大腿圍、拍照", "A醇一、三、五、日；杏仁酸二、六", "存 50 張參考圖、盤點衣櫃", "寫交易規則書＋個人財務表", "CS50P L0–1", "開始《被討厭的勇氣》"],
-    2: ["RPE 8，每組記重量次數", "觀察有無刺痛脫皮", "剪好髮、學會捲髮乳", "盤前計畫每天做", "CS50P L2–3", "每週一篇筆記"],
-    3: ["RPE 8，主項加重", "每週臉部對照照", "補襯衫、針織", "產業鏈筆記第 3 篇", "CS50P L4–5、裝 Git", "讀完第一本"],
-    4: ["W4 檢查點：拍照、量圍度", "痘痘還在就約皮膚科", "補褲子、修褲長", "10/31 第一份月報", "CS50P L6–7", "開始《交易心理分析》"],
-    5: ["RPE 8–9，孤立動作做到力竭", "A醇加到每週 5 晚", "補外套", "第一次 2 週統計", "CS50P L8–9", "繼續閱讀"],
-    6: ["RPE 8–9", "觀察膚況", "補鞋，膠囊衣櫥補齊", "砍掉負期望值 setup", "Big-O、stack、queue", "讀完第二本"],
-    7: ["加重", "維持", "每週修正 1 個比例問題", "第二次 2 週統計", "Linked list、hash table", "開始《活出意義來》"],
-    8: ["W8 檢查點：重測、拍照", "維持", "每週修正 1 個比例問題", "11/30 第二份月報", "遞迴、排序、二分搜尋", "讀完第三本"],
-    9: ["主項 RPE 9 衝重量", "A醇加到每週 6 晚", "西裝外套或 blazer", "只做有效 setup", "Tree、BST", "開始《快思慢想》"],
-    10: ["衝重量，孤立動作加遞減組", "維持", "香水、錶", "第三次 2 週統計", "Heap、graph", "繼續閱讀"],
-    11: ["最後一週重訓", "維持", "整理到 15 套組合", "開始寫年終報告", "pandas 回測專案", "繼續閱讀"],
-    12: ["12/28–29 減量，12/30 重測", "12/31 拍臉部對照照", "12/31 拍成果照", "年終報告＋12 月月報", "README、推上 GitHub", "讀完第四本、寫長文"]
+    1: ["測深蹲 5RM、硬舉 3RM、量大腿圍、拍照", "A醇每晚（三明治法）；杏仁酸二、六早上", "存 50 張參考圖、盤點衣櫃", "寫交易規則書＋個人財務表", "CS50P L0–1", "列好書單、設定每日頁數"],
+    2: ["RPE 8，每組記重量次數", "觀察有無刺痛脫皮", "剪好髮、學會捲髮乳", "盤前計畫每天做", "CS50P L2–3", "每天達標頁數、週日寫筆記"],
+    3: ["RPE 8，主項加重", "A醇改直接擦（無刺激的話）", "補襯衫、針織", "產業鏈筆記第 3 篇", "CS50P L4–5、裝 Git", "每天達標頁數"],
+    4: ["W4 檢查點：拍照、量圍度", "痘痘還在就約皮膚科", "補褲子、修褲長", "10/31 第一份月報", "CS50P L6–7", "10/31 第一篇長文"],
+    5: ["RPE 8–9，孤立動作做到力竭", "維持每晚 A醇", "補外套", "第一次 2 週統計", "CS50P L8–9", "每天達標頁數"],
+    6: ["RPE 8–9", "觀察膚況", "補鞋，膠囊衣櫥補齊", "砍掉負期望值 setup", "Big-O、stack、queue", "每天達標頁數"],
+    7: ["加重", "維持", "每週修正 1 個比例問題", "第二次 2 週統計", "Linked list、hash table", "每天達標頁數"],
+    8: ["W8 檢查點：重測、拍照", "維持", "每週修正 1 個比例問題", "11/30 第二份月報", "遞迴、排序、二分搜尋", "11/30 第二篇長文"],
+    9: ["主項 RPE 9 衝重量", "維持", "西裝外套或 blazer", "只做有效 setup", "Tree、BST", "每天達標頁數"],
+    10: ["衝重量，孤立動作加遞減組", "維持", "香水、錶", "第三次 2 週統計", "Heap、graph", "每天達標頁數"],
+    11: ["最後一週重訓", "維持", "整理到 15 套組合", "開始寫年終報告", "pandas 回測專案", "每天達標頁數"],
+    12: ["12/28–29 減量，12/30 重測", "12/31 拍臉部對照照", "12/31 拍成果照", "年終報告＋12 月月報", "README、推上 GitHub", "12/31 第三篇長文、總頁數結算"]
   };
   var FOCUS_K = ["健身", "護膚", "穿搭", "交易", "程式", "閱讀", "減脂"];
   var CUT = ["", "量體重腰圍、估 TDEE、開始記錄飲食", "進入赤字 400–500 kcal", "看 7 日均降幅 0.5–0.7%", "W4 檢查點：腰圍、體態照", "步數提高到 12,000", "依降幅微調熱量", "維持赤字", "W8 檢查點：腰圍、體態照", "維持赤字，留意力量", "維持赤字", "最後一週赤字", "12/28 起回到維持熱量"];
@@ -554,7 +587,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
   function dayScore(i) {
     var w = weekOfIdx(i), its = itemsFor(i), rec = wk(w).days[DAYS[i]] || {};
     var req = 0, done = 0;
-    its.forEach(function (x) { if (!x.opt) { req++; if (rec[x.k]) done++; } });
+    its.forEach(function (x) { if (!x.opt) { req++; if (x.pages ? (+rec.pages || 0) >= x.target : rec[x.k]) done++; } });
     return req ? done / req : 0;
   }
   function level(p) { return p <= 0 ? 0 : p < 0.4 ? 1 : p < 0.7 ? 2 : p < 1 ? 3 : 4; }
@@ -603,6 +636,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
     var ul = $("checks"); ul.innerHTML = "";
     itemsFor(i).forEach(function (x, n) {
       var li = document.createElement("li");
+      if (x.pages) { ul.appendChild(readItem(i, x, rec)); return; }
       var id = "c-" + x.k;
       li.innerHTML = '<label for="' + id + '"><input type="checkbox" id="' + id + '"><span class="body"><span class="t"></span><br><span class="sub"></span></span><span class="tag"></span></label>';
       var cb = li.querySelector("input");
@@ -621,6 +655,72 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
     dl.appendChild(h);
     f.forEach(function (t, n) { var dt = document.createElement("dt"); dt.textContent = FOCUS_K[n]; var dd = document.createElement("dd"); dd.textContent = t; dl.appendChild(dt); dl.appendChild(dd); });
   }
+  function readItem(i, x, rec) {
+    var li = document.createElement("li");
+    li.innerHTML = '<div class="readli"><span class="readmark" aria-hidden="true">✓</span><div class="body"><span class="t"></span><div class="sub"></div>' +
+      '<div class="readrow"><label for="c-read">今天讀了</label><input id="c-read" class="num" inputmode="numeric" autocomplete="off" placeholder="0"><span>頁</span><select id="c-book" aria-label="哪一本書"></select></div></div><span class="tag"></span></div>';
+    var mark = li.querySelector(".readmark"), inp = li.querySelector("#c-read"), selb = li.querySelector("#c-book");
+    li.querySelector(".t").textContent = x.t;
+    li.querySelector(".tag").textContent = x.tag;
+    var list = books().list, cur = currentBook();
+    var sub = li.querySelector(".sub");
+    if (!list.length) { sub.textContent = "先到「12 週計畫 → 閱讀」加入你自己的書"; selb.hidden = true; }
+    else {
+      var chosen = rec.book && list.some(function (b) { return b.id === rec.book; }) ? rec.book : (cur ? cur.id : list[0].id);
+      list.forEach(function (b) { var o = document.createElement("option"); o.value = b.id; o.textContent = b.title + (bookDone(b) ? "（讀完）" : ""); if (b.id === chosen) o.selected = true; selb.appendChild(o); });
+      var cb = list.filter(function (b) { return b.id === chosen; })[0];
+      sub.textContent = (x.s ? x.s + " · " : "") + (cb ? "目前 " + pagesOfBook(cb.id) + (+cb.total ? " / " + cb.total : "") + " 頁" : "");
+    }
+    if (x.s && !list.length) sub.textContent = x.s + " · " + sub.textContent;
+    inp.value = rec.pages ? String(rec.pages) : "";
+    mark.classList.toggle("on", (+rec.pages || 0) >= x.target);
+    function save() {
+      var w = weekOfIdx(i), s = wk(w), date = DAYS[i];
+      if (!s.days[date]) s.days[date] = {};
+      var r = s.days[date], n = Math.max(0, Math.floor(+inp.value || 0));
+      if (n) { r.pages = n; if (!selb.hidden && selb.value) r.book = selb.value; } else { delete r.pages; delete r.book; }
+      commit(w);
+      renderStats(); renderHeat(); renderBooks();
+      mark.classList.toggle("on", n >= x.target);
+      $("dayPct").textContent = "今天完成 " + Math.round(dayScore(i) * 100) + "%";
+    }
+    inp.addEventListener("change", save);
+    selb.addEventListener("change", save);
+    return li;
+  }
+  function renderBooks() {
+    var b = books(), tot = pagesTotal(), done = b.list.filter(bookDone).length;
+    var kpi = $("readKpi"); kpi.innerHTML = "";
+    ["每天 " + b.target + " 頁", "12 週目標約 " + (b.target * N).toLocaleString() + " 頁", "已讀 " + tot.toLocaleString() + " 頁", "書單 " + b.list.length + " 本，讀完 " + done + " 本", "每週 1 篇閱讀筆記", "每月 1 篇 1,500 字長文"].forEach(function (t) { var s = document.createElement("span"); s.textContent = t; kpi.appendChild(s); });
+    var tg = $("bk-target"); if (document.activeElement !== tg) tg.value = b.target;
+    var rows = $("bookRows"); rows.innerHTML = "";
+    if (!b.list.length) { rows.innerHTML = '<tr><td colspan="5" class="note">還沒有書。在下面輸入書名和總頁數，加入你這 12 週要讀的書。</td></tr>'; return; }
+    b.list.forEach(function (bk) {
+      var p = pagesOfBook(bk.id), tr = document.createElement("tr");
+      var pct = +bk.total ? Math.min(100, Math.round(p / bk.total * 100)) : 0;
+      tr.innerHTML = '<td class="bt"></td><td class="n">' + (+bk.total || "—") + '</td><td class="n">' + p + '</td><td><span class="mono note">' + (+bk.total ? pct + "%" : "未填總頁數") + '</span><div class="pbar"><i style="width:' + pct + '%"></i></div></td><td><button type="button" class="bk-del">移除</button></td>';
+      tr.querySelector(".bt").textContent = bk.title + (bookDone(bk) ? "（讀完）" : "");
+      var del = tr.querySelector(".bk-del");
+      del.addEventListener("click", function () {
+        if (!del.classList.contains("arm")) { del.classList.add("arm"); del.textContent = "確定移除？"; setTimeout(function () { del.classList.remove("arm"); del.textContent = "移除"; }, 3000); return; }
+        b.list = b.list.filter(function (z) { return z.id !== bk.id; });
+        commitKey("books"); renderBooks(); renderDay();
+      });
+      rows.appendChild(tr);
+    });
+  }
+  $("addBook").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var t = $("bk-title").value.trim(); if (!t) return;
+    var tp = Math.max(0, Math.floor(+$("bk-total").value || 0));
+    books().list.push({ id: "b" + Date.now().toString(36), title: t, total: tp });
+    $("bk-title").value = ""; $("bk-total").value = "";
+    commitKey("books"); renderBooks(); renderDay();
+  });
+  $("bk-target").addEventListener("change", function () {
+    var v = Math.floor(+$("bk-target").value || 0);
+    if (v > 0) { books().target = v; commitKey("books"); renderAll(); } else $("bk-target").value = books().target;
+  });
   function renderHeat() {
     var el = $("heat"); el.innerHTML = "<span></span>";
     WD.forEach(function (x) { var s = document.createElement("span"); s.className = "hd"; s.textContent = x; el.appendChild(s); });
@@ -640,7 +740,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
       }
     }
   }
-  var FIELDS = [["weight", "體重 7 日均（kg）"], ["waist", "腰圍（cm）"], ["squat", "深蹲最佳組（kg×次）"], ["rule", "規則遵守（%）"], ["hours", "程式時數（h）"], ["pages", "閱讀頁數"]];
+  var FIELDS = [["weight", "體重 7 日均（kg）"], ["waist", "腰圍（cm）"], ["squat", "深蹲最佳組（kg×次）"], ["rule", "規則遵守（%）"], ["hours", "程式時數（h）"]];
   function renderWeeks() {
     var box = $("weeks"); box.innerHTML = "";
     var curW = todayIdx >= 0 ? weekOfIdx(todayIdx) : (beforeStart ? 1 : WEEKS);
@@ -650,7 +750,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
         var sum = 0; for (var i = first; i <= last; i++) sum += dayScore(i);
         var card = document.createElement("div"); card.className = "wcard" + (w === curW ? " cur" : "");
         card.innerHTML = '<div class="wtop"><h3>W' + w + ' <span class="mono muted" style="font-size:13px;font-weight:400">' + md(DAYS[first]) + '–' + md(DAYS[last]) + ' · P' + phaseOf(w) + '</span></h3>' +
-          '<div class="r"><span class="mono">完成 ' + Math.round(sum / (last - first + 1) * 100) + '%</span><label class="exam-toggle" for="exam-' + w + '"><input type="checkbox" id="exam-' + w + '"> 考試週</label></div></div>' +
+          '<div class="r"><span class="mono">閱讀 ' + pagesInWeek(w) + ' 頁</span><span class="mono">完成 ' + Math.round(sum / (last - first + 1) * 100) + '%</span><label class="exam-toggle" for="exam-' + w + '"><input type="checkbox" id="exam-' + w + '"> 考試週</label></div></div>' +
           '<div class="fields"></div><label class="reviewlbl" for="note-' + w + '">一句話復盤<textarea id="note-' + w + '" rows="2" placeholder="這週最重要的一件事、下週只改一件事"></textarea></label>';
         var ex = card.querySelector("#exam-" + w); ex.checked = !!s.exam;
         ex.addEventListener("change", function () { wk(w).exam = ex.checked; commit(w); renderAll(); });
@@ -668,7 +768,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
       })(w);
     }
   }
-  function renderAll() { renderStats(); renderDay(); renderHeat(); if (!$("panel-weeks").hidden) renderWeeks(); }
+  function renderAll() { renderStats(); renderDay(); renderHeat(); renderBooks(); if (!$("panel-weeks").hidden) renderWeeks(); }
 
   function toggle(i, k, v) {
     var w = weekOfIdx(i), s = wk(w), date = DAYS[i];
@@ -682,10 +782,11 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
   // ---- persistence (db per viewer, localStorage fallback) ----
   var db = null, base = null, dirty = {}, timers = {}, chain = {};
   function setSync(t) { $("sync").textContent = t; }
-  function commit(w) {
+  function commit(w) { commitKey(wid(w)); }
+  function commitKey(k) {
     lsSave();
     if (!db) return;
-    var k = wid(w); dirty[k] = true;
+    dirty[k] = true;
     clearTimeout(timers[k]);
     timers[k] = setTimeout(function () {
       var body = JSON.parse(JSON.stringify(state[k]));
@@ -736,12 +837,12 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
         if (first) {
           first = false;
           // upload anything that only exists locally (e.g. checked before sign-in)
-          Object.keys(state).forEach(function (k) { if (!had[k] && /^w\d\d$/.test(k)) commit(+k.slice(1)); });
+          Object.keys(state).forEach(function (k) { if (!had[k] && /^(w\d\d|books)$/.test(k)) commitKey(k); });
         }
         lsSave();
         setSync("已同步到你的帳號");
         var focusId = document.activeElement && document.activeElement.id;
-        if (!(focusId && /^(f-|note-)/.test(focusId))) renderAll(); else { renderStats(); renderHeat(); }
+        if (!(focusId && /^(f-|note-|bk-|c-read|c-book)/.test(focusId))) renderAll(); else { renderStats(); renderHeat(); }
       }, function (e) { setSync("同步中斷，紀錄先存在這台裝置"); });
     } catch (e) { setSync("紀錄只存在這台裝置"); }
   }
