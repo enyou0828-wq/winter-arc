@@ -235,12 +235,12 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
         <div class="tbl"><table>
           <thead><tr><th></th><th>訓練</th><th>晚間保養（P1）</th><th>程式</th><th>交易</th><th>其他</th></tr></thead>
           <tbody>
-            <tr><td class="n">一</td><td>下肢 A · 力量</td><td>A醇</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>OOTD、閱讀 30′</td></tr>
-            <tr><td class="n">二</td><td>上肢 A＋有氧 20′</td><td>A醇（早上杏仁酸）</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>閱讀 30′</td></tr>
-            <tr><td class="n">三</td><td>主動恢復：坡度走 40′＋伸展</td><td>A醇</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>OOTD、閱讀 30′</td></tr>
-            <tr><td class="n">四</td><td>下肢 B · 肌肥大</td><td>A醇</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>閱讀 30′</td></tr>
-            <tr><td class="n">五</td><td>上肢 B＋有氧 20′</td><td>A醇</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>閱讀 30′</td></tr>
-            <tr><td class="n">六</td><td>下肢 C · 單側＋腿後</td><td>A醇（早上杏仁酸）</td><td>練習題／補進度</td><td>產業鏈研究 60′</td><td>OOTD、閱讀 30′</td></tr>
+            <tr><td class="n">一</td><td>下肢 A · 力量</td><td>A醇</td><td>Web 50′</td><td>盤前計畫＋盤後紀錄</td><td>OOTD、閱讀</td></tr>
+            <tr><td class="n">二</td><td>上肢 A＋有氧 20′</td><td>A醇（早上杏仁酸）</td><td>Web 50′</td><td>盤前計畫＋盤後紀錄</td><td>閱讀</td></tr>
+            <tr><td class="n">三</td><td>主動恢復：坡度走 40′＋伸展</td><td>A醇</td><td>Web 50′</td><td>盤前計畫＋盤後紀錄</td><td>OOTD、閱讀</td></tr>
+            <tr><td class="n">四</td><td>下肢 B · 肌肥大</td><td>A醇</td><td>Web 50′</td><td>盤前計畫＋盤後紀錄</td><td>閱讀</td></tr>
+            <tr><td class="n">五</td><td>上肢 B＋有氧 20′</td><td>A醇</td><td>Web 50′</td><td>盤前計畫＋盤後紀錄</td><td>閱讀</td></tr>
+            <tr><td class="n">六</td><td>下肢 C · 單側＋腿後</td><td>A醇（早上杏仁酸）</td><td>練習題／補進度</td><td>產業鏈研究 60′</td><td>OOTD、閱讀</td></tr>
             <tr><td class="n">日</td><td>休息</td><td>A醇</td><td>—</td><td>週復盤 60′</td><td>儀容整理、閱讀筆記、填每週紀錄</td></tr>
           </tbody>
         </table></div>
@@ -415,36 +415,48 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
       </section>
 
       <section class="area" id="p-code">
-        <div class="area-head"><h2>科技 · Python 與資料結構</h2><span class="muted">平日每天 50 分鐘＋週六補進度，約 4.5 小時／週</span></div>
-        <div class="kpi"><span>50 小時</span><span>CS50P 作業全部完成</span><span>LeetCode Easy 30 題</span><span>1 個專案上 GitHub</span></div>
+        <div class="area-head"><h2>科技 · 網站怎麼運作（Web 全貌）</h2><span class="muted">平日每天 50 分鐘＋週六補進度，約 4.5 小時／週</span></div>
+        <div class="kpi"><span>50 小時</span><span>個人網站上線</span><span>1 個前後端小工具上線</span><span>能畫出自己專案的架構圖</span></div>
+        <div class="box"><h3>先看懂全貌：一個網站由哪些部分組成</h3>
+          <ul class="tight">
+            <li><b>HTML</b> 是骨架，決定頁面上「有什麼」：標題、按鈕、輸入框。</li>
+            <li><b>CSS</b> 是外觀，決定「長怎樣」：顏色、排版、手機版。</li>
+            <li><b>JavaScript</b> 是動作，決定「按了會怎樣」：打勾、計算、去拿資料。瀏覽器讀 HTML 時會載入 JS，JS 再回頭改 HTML。</li>
+            <li><b>前端</b>是跑在使用者瀏覽器裡的部分（上面三個）。<b>後端</b>是跑在伺服器上的程式，負責登入、存資料、算別人看不到的東西。</li>
+            <li><b>API</b> 是前端跟後端講話的窗口，資料通常用 <b>JSON</b> 格式傳。<b>資料庫</b>是後端存資料的地方。</li>
+            <li><b>Git／GitHub</b> 管版本，<b>部署</b>是把程式放到網路上讓別人連得到（例如 GitHub Pages、Render）。</li>
+          </ul>
+        </div>
         <div class="tbl"><table>
           <thead><tr><th>週</th><th>內容</th><th>產出</th></tr></thead>
           <tbody>
-            <tr><td class="n">W1</td><td>CS50P Lecture 0–1：函式、變數、條件</td><td>Problem Set 0–1</td></tr>
-            <tr><td class="n">W2</td><td>Lecture 2–3：迴圈、例外處理</td><td>Problem Set 2–3</td></tr>
-            <tr><td class="n">W3</td><td>Lecture 4–5：函式庫、單元測試</td><td>Problem Set 4–5、裝好 Git</td></tr>
-            <tr><td class="n">W4</td><td>Lecture 6–7：檔案讀寫、正規表達式</td><td>Problem Set 6–7</td></tr>
-            <tr><td class="n">W5</td><td>Lecture 8–9：物件導向、其他</td><td>Problem Set 8–9</td></tr>
-            <tr><td class="n">W6</td><td>Big-O、陣列與 list、stack、queue</td><td>LeetCode 5 題</td></tr>
-            <tr><td class="n">W7</td><td>Linked list、hash table（dict / set）</td><td>LeetCode 5 題</td></tr>
-            <tr><td class="n">W8</td><td>遞迴、排序（merge / quick）、二分搜尋</td><td>LeetCode 5 題</td></tr>
-            <tr><td class="n">W9</td><td>Tree、BST、走訪</td><td>LeetCode 5 題</td></tr>
-            <tr><td class="n">W10</td><td>Heap、graph、BFS / DFS</td><td>LeetCode 5 題</td></tr>
-            <tr><td class="n">W11</td><td>專案：用 pandas 回測自己的突破打法</td><td>回測出勝率、賺賠比、最大回撤</td></tr>
-            <tr><td class="n">W12</td><td>專案收尾、寫 README、推上 GitHub</td><td>專案＋學習心得</td></tr>
+            <tr><td class="n">W1</td><td>網路怎麼運作：瀏覽器、網址、DNS、伺服器、HTTP；裝 VS Code，用 DevTools 拆這個 Winter Arc 頁面</td><td>一張圖：「打網址到看到畫面」中間發生什麼</td></tr>
+            <tr><td class="n">W2</td><td>HTML：結構、語意標籤、連結、圖片、表單</td><td>純 HTML 的個人介紹頁</td></tr>
+            <tr><td class="n">W3</td><td>CSS：選擇器、盒模型、Flexbox、Grid、手機版（RWD）</td><td>介紹頁排版完成，手機也好看</td></tr>
+            <tr><td class="n">W4</td><td>Git＋GitHub＋部署：commit、push、GitHub Pages</td><td>個人網站上線，有自己的網址</td></tr>
+            <tr><td class="n">W5</td><td>JavaScript 基礎：變數、條件、迴圈、函式、陣列、物件</td><td>Console 小練習 15 題</td></tr>
+            <tr><td class="n">W6</td><td>JS 操作網頁：DOM、事件、localStorage</td><td>打卡小工具（勾選後重新整理還在）</td></tr>
+            <tr><td class="n">W7</td><td>前端拿資料：fetch、JSON、API、非同步（async / await）</td><td>串一個免費 API 顯示資料（匯率或行情）</td></tr>
+            <tr><td class="n">W8</td><td>後端入門：Node.js、Express、路由、自己寫 API</td><td>本機跑起來的 API</td></tr>
+            <tr><td class="n">W9</td><td>資料庫：SQL（SELECT / INSERT / UPDATE / DELETE）、SQLite</td><td>API 把資料存進資料庫</td></tr>
+            <tr><td class="n">W10</td><td>前後端串起來：前端呼叫自己的後端，做新增／讀取／修改／刪除</td><td>交易紀錄小工具（本機完整版）</td></tr>
+            <tr><td class="n">W11</td><td>部署後端（Render）；拆解自己的交易日誌、Winter Arc：哪段是前端、資料存哪、怎麼上線</td><td>小工具上線＋兩個專案的架構圖</td></tr>
+            <tr><td class="n">W12</td><td>收尾：README、總整理筆記</td><td>「一個網站從頭到尾怎麼運作」筆記</td></tr>
           </tbody>
         </table></div>
         <div class="cols2">
           <div class="box"><h3>教材</h3>
             <ul class="tight">
-              <li><a href="https://cs50.harvard.edu/python/" target="_blank" rel="noopener">CS50P（Harvard，免費）</a>：W1–W5</li>
-              <li><a href="https://runestone.academy/ns/books/published/pythonds3/index.html" target="_blank" rel="noopener">Problem Solving with Algorithms and Data Structures using Python</a>：W6–W10</li>
-              <li><a href="https://neetcode.io/practice" target="_blank" rel="noopener">NeetCode</a>：照主題挑 Easy 題</li>
+              <li><a href="https://developer.mozilla.org/zh-TW/docs/Learn_web_development" target="_blank" rel="noopener">MDN 學習網頁開發</a>：W1–W7 的主教材，有繁中</li>
+              <li><a href="https://www.theodinproject.com/paths/foundations/courses/foundations" target="_blank" rel="noopener">The Odin Project · Foundations</a>：照順序做練習，W2–W8</li>
+              <li><a href="https://javascript.info/" target="_blank" rel="noopener">javascript.info</a>：W5–W7 查 JS 觀念</li>
+              <li><a href="https://sqlbolt.com/" target="_blank" rel="noopener">SQLBolt</a>：W9 互動式 SQL 練習</li>
             </ul>
           </div>
           <div class="box"><h3>規則</h3>
             <ul class="tight">
               <li>程式自己打。AI 只用來解釋錯誤訊息和觀念，不直接生成答案。</li>
+              <li>每週日用三句話寫下「本週學的東西在網站裡負責什麼」，講不出來就是還沒懂。</li>
               <li>每次練完 commit 一次，用 GitHub 綠格子當第二個打卡表。</li>
               <li>時數每週日填在「每週紀錄」，上方會自動加總。</li>
             </ul>
@@ -536,8 +548,8 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
     it.push({ k: "am", t: acid ? "早：洗臉 → 杏仁酸 → 保濕 → 防曬" : "早：洗臉 → 保濕 → 防曬", s: "陰天也要擦防曬", tag: "護膚" });
     it.push({ k: "pm", t: "晚：A醇", s: ph === 1 && w <= 2 ? "三明治法：保濕 → A醇 → 保濕" : "洗臉 → 等臉全乾 → A醇 → 保濕", tag: "護膚" });
     it.push({ k: "sleep", t: "00:30 前上床", s: "睡前 30 分鐘不看盤、不滑短影音", tag: "護膚" });
-    if (wd <= 4) it.push({ k: "code", t: exam ? "Python 15 分鐘（只複習）" : "Python 50 分鐘", s: codeTopic(w), tag: "程式" });
-    if (wd === 5 && !exam) it.push({ k: "code", t: "Python 練習題／補進度", s: codeTopic(w), tag: "程式" });
+    if (wd <= 4) it.push({ k: "code", t: exam ? "Web 15 分鐘（只複習）" : "Web 50 分鐘", s: codeTopic(w), tag: "程式" });
+    if (wd === 5 && !exam) it.push({ k: "code", t: "Web 練習／補進度", s: codeTopic(w), tag: "程式" });
     if (wd <= 4 && !exam) it.push({ k: "premarket", t: "盤前計畫（9:00 前）", s: "最多 3 檔：進場價、停損價、部位先算好", tag: "交易" });
     if (wd <= 4) it.push({ k: "journal", t: "盤後交易紀錄", s: "每筆記 R 倍數、有沒有照規則", tag: "交易" });
     if (wd === 5 && !exam) it.push({ k: "chain", t: "產業鏈研究 60 分鐘", s: "寫 1 篇：上中下游、龍頭、催化劑", tag: "交易" });
@@ -548,7 +560,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
     it.push({ k: "read", pages: true, target: pageTarget(exam), t: "閱讀 " + pageTarget(exam) + " 頁", s: wd === 6 ? "今天寫閱讀筆記" : "", tag: "閱讀" });
     return it;
   }
-  var CODE = ["", "CS50P L0–1 · 函式、變數、條件", "CS50P L2–3 · 迴圈、例外", "CS50P L4–5 · 函式庫、單元測試", "CS50P L6–7 · 檔案、正規表達式", "CS50P L8–9 · 物件導向", "Big-O、list、stack、queue", "Linked list、hash table", "遞迴、排序、二分搜尋", "Tree、BST、走訪", "Heap、graph、BFS/DFS", "專案：pandas 回測", "專案收尾、README、GitHub"];
+  var CODE = ["", "網路怎麼運作、DevTools", "HTML 結構與表單", "CSS 排版、手機版", "Git、GitHub Pages 上線", "JS 基礎：變數、函式、陣列、物件", "JS 操作網頁：DOM、事件", "fetch、JSON、API", "後端：Node.js、Express", "資料庫：SQL、SQLite", "前後端串起來", "部署後端、拆解自己的專案", "README、總整理筆記"];
   function codeTopic(w) { return "本週：" + CODE[w]; }
   // ---- books (user's own list, counted in pages) ----
   function books() {
@@ -567,18 +579,18 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
   var STYLE = ["", "存 50 張參考圖、盤點衣櫃", "剪好捲髮髮型、練捲髮乳", "補襯衫、針織", "補褲子、修褲長", "補外套", "補鞋，膠囊衣櫥補齊", "找出比例問題並修正", "找出比例問題並修正", "西裝外套或 blazer", "香水、錶", "整理到 15 套組合", "拍成果照"];
   function styleTask(w) { return "本週：" + STYLE[w]; }
   var FOCUS = {
-    1: ["測深蹲 5RM、硬舉 3RM、量大腿圍、拍照", "A醇每晚（三明治法）；杏仁酸二、六早上", "存 50 張參考圖、盤點衣櫃", "寫交易規則書＋個人財務表", "CS50P L0–1", "列好書單、設定每日頁數"],
-    2: ["RPE 8，每組記重量次數", "觀察有無刺痛脫皮", "剪好髮、學會捲髮乳", "盤前計畫每天做", "CS50P L2–3", "每天達標頁數、週日寫筆記"],
-    3: ["RPE 8，主項加重", "A醇改直接擦（無刺激的話）", "補襯衫、針織", "產業鏈筆記第 3 篇", "CS50P L4–5、裝 Git", "每天達標頁數"],
-    4: ["W4 檢查點：拍照、量圍度", "痘痘還在就約皮膚科", "補褲子、修褲長", "10/31 第一份月報", "CS50P L6–7", "10/31 第一篇長文"],
-    5: ["RPE 8–9，孤立動作做到力竭", "維持每晚 A醇", "補外套", "第一次 2 週統計", "CS50P L8–9", "每天達標頁數"],
-    6: ["RPE 8–9", "觀察膚況", "補鞋，膠囊衣櫥補齊", "砍掉負期望值 setup", "Big-O、stack、queue", "每天達標頁數"],
-    7: ["加重", "維持", "每週修正 1 個比例問題", "第二次 2 週統計", "Linked list、hash table", "每天達標頁數"],
-    8: ["W8 檢查點：重測、拍照", "維持", "每週修正 1 個比例問題", "11/30 第二份月報", "遞迴、排序、二分搜尋", "11/30 第二篇長文"],
-    9: ["主項 RPE 9 衝重量", "維持", "西裝外套或 blazer", "只做有效 setup", "Tree、BST", "每天達標頁數"],
-    10: ["衝重量，孤立動作加遞減組", "維持", "香水、錶", "第三次 2 週統計", "Heap、graph", "每天達標頁數"],
-    11: ["最後一週重訓", "維持", "整理到 15 套組合", "開始寫年終報告", "pandas 回測專案", "每天達標頁數"],
-    12: ["12/28–29 減量，12/30 重測", "12/31 拍臉部對照照", "12/31 拍成果照", "年終報告＋12 月月報", "README、推上 GitHub", "12/31 第三篇長文、總頁數結算"]
+    1: ["測深蹲 5RM、硬舉 3RM、量大腿圍、拍照", "A醇每晚（三明治法）；杏仁酸二、六早上", "存 50 張參考圖、盤點衣櫃", "寫交易規則書＋個人財務表", "DevTools 拆這個頁面、畫網路流程圖", "列好書單、設定每日頁數"],
+    2: ["RPE 8，每組記重量次數", "觀察有無刺痛脫皮", "剪好髮、學會捲髮乳", "盤前計畫每天做", "純 HTML 個人頁", "每天達標頁數、週日寫筆記"],
+    3: ["RPE 8，主項加重", "A醇改直接擦（無刺激的話）", "補襯衫、針織", "產業鏈筆記第 3 篇", "CSS 排版、手機版", "每天達標頁數"],
+    4: ["W4 檢查點：拍照、量圍度", "痘痘還在就約皮膚科", "補褲子、修褲長", "10/31 第一份月報", "個人網站上線", "10/31 第一篇長文"],
+    5: ["RPE 8–9，孤立動作做到力竭", "維持每晚 A醇", "補外套", "第一次 2 週統計", "JS 基礎 15 題", "每天達標頁數"],
+    6: ["RPE 8–9", "觀察膚況", "補鞋，膠囊衣櫥補齊", "砍掉負期望值 setup", "打卡小工具（DOM＋localStorage）", "每天達標頁數"],
+    7: ["加重", "維持", "每週修正 1 個比例問題", "第二次 2 週統計", "fetch 串免費 API", "每天達標頁數"],
+    8: ["W8 檢查點：重測、拍照", "維持", "每週修正 1 個比例問題", "11/30 第二份月報", "Node＋Express 寫 API", "11/30 第二篇長文"],
+    9: ["主項 RPE 9 衝重量", "維持", "西裝外套或 blazer", "只做有效 setup", "SQL、SQLite 存資料", "每天達標頁數"],
+    10: ["衝重量，孤立動作加遞減組", "維持", "香水、錶", "第三次 2 週統計", "前後端串成交易紀錄工具", "每天達標頁數"],
+    11: ["最後一週重訓", "維持", "整理到 15 套組合", "開始寫年終報告", "部署後端、畫專案架構圖", "每天達標頁數"],
+    12: ["12/28–29 減量，12/30 重測", "12/31 拍臉部對照照", "12/31 拍成果照", "年終報告＋12 月月報", "README、總整理筆記", "12/31 第三篇長文、總頁數結算"]
   };
   var FOCUS_K = ["健身", "護膚", "穿搭", "交易", "程式", "閱讀", "減脂"];
   var CUT = ["", "量體重腰圍、估 TDEE、開始記錄飲食", "進入赤字 400–500 kcal", "看 7 日均降幅 0.5–0.7%", "W4 檢查點：腰圍、體態照", "步數提高到 12,000", "依降幅微調熱量", "維持赤字", "W8 檢查點：腰圍、體態照", "維持赤字，留意力量", "維持赤字", "最後一週赤字", "12/28 起回到維持熱量"];
