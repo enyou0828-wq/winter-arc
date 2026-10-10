@@ -316,6 +316,19 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
             </ul>
           </div>
         </div>
+        <div class="box"><h3>固定一餐（午餐或晚餐，肉秤生重）</h3>
+          <div class="tbl"><table>
+            <thead><tr><th>組合</th><th>內容</th><th>約略</th></tr></thead>
+            <tbody>
+              <tr><td class="n">A 雞胸地瓜</td><td>雞胸肉片 200 g、冰烤地瓜 200 g、花椰菜 150 g、橄欖油 1 小匙</td><td>560 kcal · 蛋白質 55 g</td></tr>
+              <tr><td class="n">B 鮭魚＋蛋</td><td>鮭魚 150 g（乾煎）、蛋 1 顆、冰烤地瓜 150 g、地瓜葉 200 g（1 小匙橄欖油炒）</td><td>670 kcal · 蛋白質 46 g</td></tr>
+              <tr><td class="n">C 牛雞雙拼</td><td>梅花牛 100 g、雞胸肉片 100 g、冰烤地瓜 150 g、花椰菜 150 g、不加油</td><td>600 kcal · 蛋白質 47 g</td></tr>
+              <tr><td class="n">D 雞胸＋雙蛋</td><td>雞胸肉片 150 g、蛋 2 顆、冰烤地瓜 150 g、花椰菜 150 g、橄欖油 1 小匙</td><td>600 kcal · 蛋白質 55 g</td></tr>
+              <tr><td class="n">E 梅花牛</td><td>梅花牛 150 g、蛋 1 顆、冰烤地瓜 150 g、地瓜葉 200 g（燙）</td><td>690 kcal · 蛋白質 42 g</td></tr>
+            </tbody>
+          </table></div>
+          <p class="note">輪替：一 A、二 C、三 B、四 A、五 D、六 E、日 B。梅花牛一週 2 次、鮭魚 2 次；練腿日地瓜吃多一點。蛋白質以 70 kg 估算，這餐約占全天 105 g 的一半。橄欖油用小匙量；冰烤地瓜熱量依包裝標示。週日一次分裝雞胸、切好花椰菜。</p>
+        </div>
         <div class="box"><h3>每週怎麼調整（看 7 日平均體重）</h3>
           <ul class="tight">
             <li>降幅 0.5–0.7%：照原計畫。</li>
@@ -529,6 +542,14 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
   // ---- daily items ----
   var TRAIN = ["下肢 A · 力量", "上肢 A", null, "下肢 B · 肌肥大", "上肢 B", "下肢 C · 單側＋腿後", null];
   var TRAIN_SUB = ["深蹲 5×5＋退階 2×8、RDL 4×6–8、保加利亞分腿蹲、腿彎舉、提踵 5 組", "臥推、槓鈴划船、下拉、側平舉，各 3 組", null, "硬舉 4×3–5、腿推（遞減組）、臀推、腿伸（遞減組）、坐姿提踵", "上斜推、坐姿划船、窄握划船、反向飛鳥、手臂，各 3 組", "前蹲或哈克深蹲、弓箭步、Nordic curl、提踵 5 組", null];
+  var MEALS = {
+    A: ["A 雞胸地瓜", "雞胸肉片 200 g、冰烤地瓜 200 g、花椰菜 150 g、橄欖油 1 小匙 · 約 560 kcal／蛋白質 55 g"],
+    B: ["B 鮭魚＋蛋", "鮭魚 150 g 乾煎、蛋 1 顆、冰烤地瓜 150 g、地瓜葉 200 g（1 小匙油炒）· 約 670 kcal／蛋白質 46 g"],
+    C: ["C 牛雞雙拼", "梅花牛 100 g、雞胸肉片 100 g、冰烤地瓜 150 g、花椰菜 150 g、不加油 · 約 600 kcal／蛋白質 47 g"],
+    D: ["D 雞胸＋雙蛋", "雞胸肉片 150 g、蛋 2 顆、冰烤地瓜 150 g、花椰菜 150 g、橄欖油 1 小匙 · 約 600 kcal／蛋白質 55 g"],
+    E: ["E 梅花牛", "梅花牛 150 g、蛋 1 顆、冰烤地瓜 150 g、地瓜葉 200 g 燙 · 約 690 kcal／蛋白質 42 g"]
+  };
+  var MEAL_ROT = ["A", "C", "B", "A", "D", "E", "B"];
   var MONTH_END = { "2026-10-31": 1, "2026-11-30": 1, "2026-12-31": 1 };
   function itemsFor(i) {
     var w = weekOfIdx(i), wd = i % 7, ph = phaseOf(w), exam = !!wk(w).exam, date = DAYS[i];
@@ -545,6 +566,8 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
     if (!exam && (wd === 1 || wd === 4)) it.push({ k: "cardio", t: "有氧 20 分鐘", s: "上肢練完接著做：坡度走或飛輪，能講話的強度", tag: "減脂" });
     it.push({ k: "weigh", t: "早上量體重", s: "起床、上完廁所、吃東西前", tag: "減脂" });
     it.push({ k: "kcal", t: exam ? "熱量回到維持（diet break）" : "熱量在目標內", s: "TDEE −400–500 kcal，App 記錄每一餐", tag: "減脂" });
+    var meal = MEALS[MEAL_ROT[wd]];
+    it.push({ k: "meal", t: "固定一餐：" + meal[0], s: meal[1] + "（肉秤生重）", tag: "減脂" });
     it.push({ k: "steps", t: exam ? "步數 7,000" : ph === 1 ? "步數 10,000" : "步數 12,000", s: "通勤多走一站也算", tag: "減脂" });
     it.push({ k: "protein", t: "蛋白質達標", s: "每公斤體重 1.5 g；肌酸 5 g", tag: "健身" });
     var acid = !exam && (wd === 1 || wd === 5);
