@@ -166,7 +166,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
     <div class="stats">
       <div class="stat"><span class="k" id="st-day-k">進度</span><span class="v" id="st-day">—</span><div class="bar"><i id="st-day-bar" style="width:0%"></i></div></div>
       <div class="stat"><span class="k">打卡完成率</span><span class="v" id="st-rate">—</span><div class="bar"><i id="st-rate-bar" style="width:0%"></i></div></div>
-      <div class="stat"><span class="k">訓練次數（目標 45–55）</span><span class="v" id="st-train">—</span><div class="bar"><i id="st-train-bar" style="width:0%"></i></div></div>
+      <div class="stat"><span class="k">訓練次數（目標 50+）</span><span class="v" id="st-train">—</span><div class="bar"><i id="st-train-bar" style="width:0%"></i></div></div>
       <div class="stat"><span class="k">程式時數（目標 50）</span><span class="v" id="st-code">—</span><div class="bar"><i id="st-code-bar" style="width:0%"></i></div></div>
     </div>
   </header>
@@ -218,77 +218,80 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
         <div class="tbl"><table>
           <thead><tr><th></th><th>訓練</th><th>晚間保養（P1）</th><th>程式</th><th>交易</th><th>其他</th></tr></thead>
           <tbody>
-            <tr><td class="n">一</td><td>下肢 A · 力量</td><td>A醇</td><td>Python 50′</td><td>盤後紀錄</td><td>閱讀 20′</td></tr>
-            <tr><td class="n">二</td><td>上肢 A · 維持</td><td>杏仁酸</td><td>Python 50′</td><td>盤後紀錄</td><td>閱讀 20′</td></tr>
-            <tr><td class="n">三</td><td>休息 · 走 8,000 步</td><td>A醇</td><td>Python 50′</td><td>盤後紀錄</td><td>OOTD、閱讀</td></tr>
-            <tr><td class="n">四</td><td>下肢 B · 肌肥大</td><td>修護（只保濕）</td><td>Python 50′</td><td>盤後紀錄</td><td>閱讀 20′</td></tr>
-            <tr><td class="n">五</td><td>上肢 B · 維持</td><td>A醇</td><td>Python 50′</td><td>盤後紀錄</td><td>閱讀 20′</td></tr>
-            <tr><td class="n">六</td><td>下肢 C · 輕量（可選）</td><td>杏仁酸</td><td>練習題／補進度</td><td>—</td><td>OOTD、逛街或整理衣櫃</td></tr>
-            <tr><td class="n">日</td><td>休息</td><td>修護（只保濕）</td><td>—</td><td>週復盤 60′</td><td>閱讀筆記、填每週紀錄</td></tr>
+            <tr><td class="n">一</td><td>下肢 A · 力量</td><td>A醇</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>OOTD、閱讀 30′</td></tr>
+            <tr><td class="n">二</td><td>上肢 A</td><td>杏仁酸</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>閱讀 30′</td></tr>
+            <tr><td class="n">三</td><td>主動恢復：坡度走 20′＋伸展</td><td>A醇</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>OOTD、閱讀 30′</td></tr>
+            <tr><td class="n">四</td><td>下肢 B · 肌肥大</td><td>修護（只保濕）</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>閱讀 30′</td></tr>
+            <tr><td class="n">五</td><td>上肢 B</td><td>A醇</td><td>Python 50′</td><td>盤前計畫＋盤後紀錄</td><td>閱讀 30′</td></tr>
+            <tr><td class="n">六</td><td>下肢 C · 單側＋腿後</td><td>杏仁酸</td><td>練習題／補進度</td><td>產業鏈研究 60′</td><td>OOTD、閱讀 30′</td></tr>
+            <tr><td class="n">日</td><td>休息</td><td>A醇</td><td>—</td><td>週復盤 60′</td><td>儀容整理、閱讀筆記、填每週紀錄</td></tr>
           </tbody>
         </table></div>
+        <p class="note">每天都有：步數 10,000、蛋白質 1.5 g/kg、早上防曬、00:30 前上床。</p>
         <div class="box">
-          <h3>考試週減量版（在「每週紀錄」勾選考試週即自動切換）</h3>
+          <h3>考試週版本（在「每週紀錄」勾選考試週即自動切換）</h3>
           <ul class="tight">
-            <li>訓練只留 2 次：週一下肢 A、週四全身，組數減半、不加重。</li>
-            <li>保養只做早晚基本＋防曬，暫停酸類，A醇照常。</li>
+            <li>訓練留 3 次：週一下肢 A、週三上肢、週五下肢 B。強度不降，組數減三分之一。</li>
+            <li>保養照常，只暫停杏仁酸。步數降到 7,000。</li>
             <li>程式每天 15 分鐘，只複習，不學新章節。</li>
-            <li>閱讀改成睡前 10 分鐘；交易部位減半或空手。</li>
-            <li>這一週照減量版做完就算達標，不算中斷。</li>
+            <li>閱讀改成睡前 15 分鐘；交易只做盤後紀錄，部位減半或空手。</li>
+            <li>這一週照考試週版本做完就算達標，不算中斷。</li>
           </ul>
         </div>
       </section>
 
       <section class="area" id="p-fit">
-        <div class="area-head"><h2>健身 · 下半身主攻</h2><span class="muted">下肢每週 2 次重訓＋1 次輕量，上肢每週 2 次維持</span></div>
-        <div class="kpi"><span>訓練 45–55 次</span><span>深蹲 5RM ＋7.5–12.5 kg</span><span>大腿圍每 4 週量一次</span><span>每 2 週拍體態照</span></div>
+        <div class="area-head"><h2>健身 · 下半身主攻</h2><span class="muted">下肢每週 3 次（全部必做），上肢每週 2 次，每天 10,000 步</span></div>
+        <div class="kpi"><span>訓練 50 次以上（最多 58）</span><span>深蹲 5RM ＋12.5–20 kg</span><span>硬舉 3RM ＋15–20 kg</span><span>大腿圍每 4 週量一次</span><span>每 2 週拍體態照</span></div>
         <div class="tbl"><table>
           <thead><tr><th>課表</th><th>動作</th><th>組 × 次</th></tr></thead>
           <tbody>
-            <tr><td rowspan="5">下肢 A<br><span class="note">力量</span></td><td>Back squat</td><td class="n">4 × 5</td></tr>
-            <tr><td>Romanian deadlift</td><td class="n">3 × 6–8</td></tr>
-            <tr><td>Bulgarian split squat</td><td class="n">3 × 8 / 腿</td></tr>
-            <tr><td>Leg curl</td><td class="n">3 × 10–12</td></tr>
-            <tr><td>站姿提踵</td><td class="n">4 × 8–10</td></tr>
-            <tr><td rowspan="6">下肢 B<br><span class="note">肌肥大</span></td><td>Deadlift（或六角槓）</td><td class="n">3 × 3–5</td></tr>
-            <tr><td>Leg press</td><td class="n">3 × 10–15</td></tr>
-            <tr><td>Hip thrust</td><td class="n">3 × 8–10</td></tr>
-            <tr><td>Leg extension</td><td class="n">3 × 12–15</td></tr>
-            <tr><td>坐姿提踵</td><td class="n">3 × 12–15</td></tr>
-            <tr><td>懸吊舉腿</td><td class="n">3 × 10–12</td></tr>
-            <tr><td rowspan="3">下肢 C<br><span class="note">輕量，可選</span></td><td>Walking lunge</td><td class="n">3 × 12 / 腿</td></tr>
-            <tr><td>Leg curl 或 Nordic curl</td><td class="n">3 × 8–10</td></tr>
-            <tr><td>提踵</td><td class="n">4 × 15</td></tr>
-            <tr><td>上肢 A</td><td>Bench press、Barbell row、High pulldown、側平舉</td><td class="n">各 2–3 組</td></tr>
-            <tr><td>上肢 B</td><td>上斜啞鈴推、Cable row、Narrow grip row、Reverse fly、二頭三頭</td><td class="n">各 2–3 組</td></tr>
+            <tr><td rowspan="6">下肢 A<br><span class="note">力量</span></td><td>Back squat</td><td class="n">5 × 5</td></tr>
+            <tr><td>Back squat 退階組（top set 的 80%）</td><td class="n">2 × 8</td></tr>
+            <tr><td>Romanian deadlift</td><td class="n">4 × 6–8</td></tr>
+            <tr><td>Bulgarian split squat</td><td class="n">4 × 8 / 腿</td></tr>
+            <tr><td>Leg curl</td><td class="n">4 × 10–12</td></tr>
+            <tr><td>站姿提踵</td><td class="n">5 × 8–10</td></tr>
+            <tr><td rowspan="6">下肢 B<br><span class="note">肌肥大</span></td><td>Deadlift（或六角槓）</td><td class="n">4 × 3–5</td></tr>
+            <tr><td>Leg press（最後一組做遞減組）</td><td class="n">4 × 10–15</td></tr>
+            <tr><td>Hip thrust</td><td class="n">4 × 8–10</td></tr>
+            <tr><td>Leg extension（最後一組做遞減組）</td><td class="n">3 × 12–15</td></tr>
+            <tr><td>坐姿提踵</td><td class="n">4 × 12–15</td></tr>
+            <tr><td>懸吊舉腿</td><td class="n">3 × 12–15</td></tr>
+            <tr><td rowspan="4">下肢 C<br><span class="note">單側＋腿後</span></td><td>Front squat 或 Hack squat</td><td class="n">3 × 8–10</td></tr>
+            <tr><td>Walking lunge</td><td class="n">3 × 12 / 腿</td></tr>
+            <tr><td>Nordic curl（做不到就離心）</td><td class="n">3 × 5–8</td></tr>
+            <tr><td>提踵</td><td class="n">5 × 15</td></tr>
+            <tr><td>上肢 A</td><td>Bench press、Barbell row、High pulldown、側平舉</td><td class="n">各 3 組</td></tr>
+            <tr><td>上肢 B</td><td>上斜啞鈴推、Cable row、Narrow grip row、Reverse fly、二頭三頭</td><td class="n">各 3 組</td></tr>
           </tbody>
         </table></div>
         <div class="phases">
-          <div><b>P1 · W1–4</b>RPE 7–8，先把深蹲、硬舉的動作練穩。W1 測一次深蹲 5RM、量大腿圍、拍照當基準。</div>
-          <div><b>P2 · W5–8</b>RPE 8–9，雙重漸進：每組都做到次數上限，下次加 2.5 kg。W8 結束再量一次。</div>
-          <div><b>P3 · W9–12</b>W9–11 衝最高重量，W12 減量。12/30 重測深蹲 5RM，12/31 拍成果照。</div>
+          <div><b>P1 · W1–4</b>RPE 8，主項留 2 下，孤立動作做到離力竭 1 下。W1 測深蹲 5RM、硬舉 3RM、量大腿圍、拍照當基準。</div>
+          <div><b>P2 · W5–8</b>RPE 8–9，雙重漸進：每組做到次數上限，下次主項加 2.5–5 kg。孤立動作最後一組做到力竭。W8 結束再測一次。</div>
+          <div><b>P3 · W9–12</b>W9–11 主項 RPE 9 衝重量，孤立動作全部加遞減組。12/28–29 減量，12/30 重測深蹲 5RM 和硬舉 3RM，12/31 拍成果照。</div>
         </div>
-        <p class="note">每週組數目標：股四頭 12–16 組、腿後 10–12 組、臀 10 組以上、小腿 8–12 組。飲食：蛋白質每公斤體重 1.5 g，熱量維持或只少 200–300 kcal，下半身才長得起來。肌酸每天 5 g。</p>
+        <p class="note">每週組數目標：股四頭 16–20 組、腿後 12–16 組、臀 12 組以上、小腿 12–16 組。每組都記錄重量和次數，同一個動作至少每 2 週要進步一次（重量或次數）；連續 2 週沒進步就換變化式。飲食：蛋白質每公斤體重 1.5 g，熱量維持或只少 200–300 kcal，肌酸每天 5 g，00:30 前上床。</p>
       </section>
 
       <section class="area" id="p-skin">
         <div class="area-head"><h2>護膚</h2><span class="muted">冬天先顧好屏障，再談 A醇和酸</span></div>
-        <div class="kpi"><span>防曬每天擦</span><span>每 2 週同光線拍臉部照</span><span>W8 評估是否看皮膚科</span></div>
+        <div class="kpi"><span>防曬每天擦</span><span>每週同光線拍臉部照</span><span>W4 評估是否看皮膚科</span><span>每天 00:30 前上床</span></div>
         <div class="cols2">
           <div class="box"><h3>早上（每天）</h3><p>溫和洗面乳 → 保濕 → 防曬 SPF30+ / PA+++。陰天、在室內也要擦，A醇沒配防曬會白做。</p></div>
           <div class="box"><h3>晚上（輪替）</h3><p>洗臉 → 當晚的活性成分 → 保濕。A醇和杏仁酸絕對不要同一晚疊用。</p></div>
         </div>
         <div class="phases">
-          <div><b>P1 · W1–4</b>A醇週一、三、五；杏仁酸週二、六；週四、日修護夜只保濕。</div>
-          <div><b>P2 · W5–8</b>沒有脫皮刺痛就把 A醇加到週日；杏仁酸減為週六一次。W8 若還有發炎型痘痘，就預約皮膚科。</div>
-          <div><b>P3 · W9–12</b>維持 P2 的頻率，不再加新產品。12/31 拍照對照 10/12。</div>
+          <div><b>P1 · W1–4</b>A醇每週 4 晚（一、三、五、日）；杏仁酸週二、六；週四修護夜只保濕。W4 若還有發炎型痘痘，直接預約皮膚科，不再自己硬撐。</div>
+          <div><b>P2 · W5–8</b>沒有脫皮刺痛就把 A醇加到每週 5 晚（加週四）；杏仁酸減為週六一次；週二修護夜。</div>
+          <div><b>P3 · W9–12</b>耐受良好就 A醇每週 6 晚，只留週六給杏仁酸。12/31 拍照對照 10/12。</div>
         </div>
-        <p class="note">出現刺痛、泛紅、脫皮：停掉所有活性成分 3 天，只做保濕。抬頭紋主要靠 A醇加防曬長期改善；冬天記得護唇和身體乳。</p>
+        <p class="note">出現刺痛、泛紅、脫皮：退回上一階段的頻率，並停掉所有活性成分 3 天，只做保濕。抬頭紋主要靠 A醇加防曬長期改善；冬天記得護唇和身體乳。睡眠是皮膚最便宜的保養，所以 00:30 前上床也列入每日打卡。</p>
       </section>
 
       <section class="area" id="p-style">
         <div class="area-head"><h2>穿搭 · Clean fit / Old money</h2><span class="muted">合身優先於品牌，質感優先於數量</span></div>
-        <div class="kpi"><span>10 套可穿的組合</span><span>每週 2 張 OOTD</span><span>剪一次適合捲髮的髮型</span></div>
+        <div class="kpi"><span>15 套可穿的組合</span><span>每週 3 張 OOTD</span><span>W2 前剪好捲髮髮型</span><span>W6 前補齊膠囊衣櫥</span><span>每週日整理儀容</span></div>
         <div class="cols2">
           <div class="box"><h3>原則</h3>
             <ul class="tight">
@@ -311,16 +314,18 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
           </div>
         </div>
         <div class="phases">
-          <div><b>P1 · W1–4</b>W1 存 30 張參考圖，找出共通點；盤點衣櫃，捐掉不合身的。W2 找會剪捲髮的設計師（兩側收短、頂部留捲度）。W3–4 開始補清單前 3 項。</div>
-          <div><b>P2 · W5–8</b>補完褲子、外套、鞋；褲長拿去修改。每週三、六各拍 1 張 OOTD，看照片調整比例。</div>
-          <div><b>P3 · W9–12</b>整理出 10 套固定組合（拍照存相簿），補配件。12/31 拍成果照。</div>
+          <div><b>P1 · W1–4</b>W1 存 50 張參考圖，寫下 5 個共通點；盤點衣櫃，捐掉不合身的。W2 前剪好髮（兩側收短、頂部留捲度），學會用捲髮乳。W3–4 補襯衫、針織、褲子。</div>
+          <div><b>P2 · W5–8</b>W6 前補齊外套和鞋，褲長全部修好。每週一、三、六各拍 1 張 OOTD，每週選 1 張找出比例問題並修正。</div>
+          <div><b>P3 · W9–12</b>進階：一件西裝外套或 blazer 撐正式場合、香水、皮錶帶錶。整理出 15 套固定組合（拍照存相簿）。12/31 拍成果照。</div>
         </div>
+        <p class="note">每週日儀容整理：修眉、剪指甲、清鼻毛、皮鞋和麂皮保養、整燙下週要穿的襯衫。</p>
         <p class="note">預算先自己定一個上限，照清單順序買，買到哪就停在哪。基本款 UNIQLO／MUJI 就夠，預算多再升級到 COS、Massimo Dutti 的針織和外套。</p>
       </section>
 
       <section class="area" id="p-trade">
         <div class="area-head"><h2>交易</h2><span class="muted">這 12 週先求守住，再求翻身</span></div>
-        <div class="kpi"><span>12 篇週復盤</span><span>規則遵守 ≥ 90%</span><span>最大回撤 &lt; 10%</span><span>12/31 年終報告</span></div>
+        <div class="kpi"><span>每個交易日盤前計畫</span><span>12 篇週復盤</span><span>12 篇產業鏈筆記</span><span>3 份月報</span><span>規則遵守 ≥ 95%</span><span>最大回撤 &lt; 8%</span></div>
+        <p class="note">加強的是準備和檢討的強度，不是風險。單筆風險上限維持 1%，絕對不因為「計畫變嚴格」就加大部位。</p>
         <div class="cols2">
           <div class="box"><h3>硬規則</h3>
             <ul class="tight">
@@ -328,6 +333,13 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
               <li>單日虧損 2% 停止交易；單週虧損 5%，下週部位減半。</li>
               <li>只做主流族群＋有量的突破＋大盤環境配合。</li>
               <li>不攤平、不凹單。停損到了就出場。</li>
+            </ul>
+          </div>
+          <div class="box"><h3>盤前計畫（每個交易日 9:00 前，10 分鐘）</h3>
+            <ul class="tight">
+              <li>美股、期貨、昨天的主流族群強弱</li>
+              <li>最多 3 檔候選：進場價、停損價、部位大小先算好</li>
+              <li>今天不做什麼（例如不追開盤、不碰非主流）</li>
             </ul>
           </div>
           <div class="box"><h3>週日復盤模板</h3>
@@ -341,8 +353,8 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
           </div>
         </div>
         <div class="phases">
-          <div><b>P1 · W1–4</b>W1 寫好交易規則書和個人財務表（資產、負債、每月收支）。每筆交易記在 trading-journal。</div>
-          <div><b>P2 · W5–8</b>統計前 4 週：勝率、平均賺賠比、平均 R、各 setup 的表現。找出最賺和最虧的情境。</div>
+          <div><b>P1 · W1–4</b>W1 寫好交易規則書和個人財務表（資產、負債、每月收支）。每筆交易記在 trading-journal。每週六寫 1 篇產業鏈筆記（上中下游、龍頭、催化劑）。10/31 交第一份月報。</div>
+          <div><b>P2 · W5–8</b>每 2 週統計一次：勝率、平均賺賠比、平均 R、各 setup 的表現。砍掉期望值為負的 setup。11/30 交第二份月報。</div>
           <div><b>P3 · W9–12</b>只做數據證明有效的 setup。12/31 寫年終報告：資金曲線、最大回撤、規則遵守率、2027 的規則修訂。</div>
         </div>
       </section>
@@ -386,17 +398,19 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
       </section>
 
       <section class="area" id="p-read">
-        <div class="area-head"><h2>閱讀</h2><span class="muted">睡前 20 分鐘讀紙本，取代滑手機</span></div>
-        <div class="kpi"><span>至少 2 本，挑戰 3 本</span><span>每週 1 篇閱讀筆記，共 12 篇</span></div>
+        <div class="area-head"><h2>閱讀</h2><span class="muted">每天 30 分鐘讀紙本，睡前不滑手機</span></div>
+        <div class="kpi"><span>4 本，挑戰 5 本</span><span>約 1,500 頁</span><span>每週 1 篇閱讀筆記，共 12 篇</span><span>每月 1 篇 1,500 字長文</span></div>
         <div class="tbl"><table>
           <thead><tr><th>期間</th><th>書</th><th>為什麼選這本</th></tr></thead>
           <tbody>
-            <tr><td class="n">W1–W5</td><td>《被討厭的勇氣》</td><td>對應「減少反覆自我評價」和人際焦慮，對話體，好讀。</td></tr>
-            <tr><td class="n">W6–W9</td><td>《交易心理分析》（Mark Douglas）</td><td>對應交易紀律，跟每週復盤一起讀。</td></tr>
-            <tr><td class="n">W10–W12</td><td>《活出意義來》（Frankl）或《原子習慣》</td><td>篇幅短，適合期末前收尾；二選一。</td></tr>
+            <tr><td class="n">W1–W3</td><td>《被討厭的勇氣》</td><td>對應「減少反覆自我評價」和人際焦慮，對話體，好讀。</td></tr>
+            <tr><td class="n">W4–W6</td><td>《交易心理分析》（Mark Douglas）</td><td>對應交易紀律，跟每週復盤一起讀。</td></tr>
+            <tr><td class="n">W7–W8</td><td>《活出意義來》（Frankl）</td><td>篇幅短，剛好接在期中考後。</td></tr>
+            <tr><td class="n">W9–W12</td><td>《快思慢想》（Kahneman）</td><td>最硬的一本。講判斷偏誤，直接對應交易和臨床判斷。</td></tr>
+            <tr><td class="n">挑戰</td><td>《原子習慣》</td><td>前四本提早讀完再讀。</td></tr>
           </tbody>
         </table></div>
-        <p class="note">每週筆記格式：3 個重點、1 個不同意或有疑問的地方、1 個下週要做的行動。考試週改成睡前 10 分鐘。</p>
+        <p class="note">每週筆記格式：3 個重點、1 個不同意或有疑問的地方、1 個下週要做的行動。月底長文（10/31、11/30、12/31）：挑當月一本書的一個觀點，寫自己同不同意、為什麼。考試週改成睡前 15 分鐘。</p>
       </section>
     </div>
   </div>
@@ -440,52 +454,63 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
   function lsSave() { try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {} }
 
   // ---- daily items ----
-  var TRAIN = ["下肢 A · 力量", "上肢 A · 維持", "休息日：走 8,000 步", "下肢 B · 肌肥大", "上肢 B · 維持", "下肢 C · 輕量", null];
-  var TRAIN_SUB = ["深蹲 4×5、RDL、保加利亞分腿蹲、腿彎舉、提踵", "臥推、槓鈴划船、下拉、側平舉，各 2–3 組", "不進健身房，靠步數", "硬舉、腿推、臀推、腿伸、坐姿提踵", "上斜推、坐姿划船、窄握划船、反向飛鳥、手臂", "弓箭步、腿彎舉、提踵；累了可以跳過", null];
+  var TRAIN = ["下肢 A · 力量", "上肢 A", null, "下肢 B · 肌肥大", "上肢 B", "下肢 C · 單側＋腿後", null];
+  var TRAIN_SUB = ["深蹲 5×5＋退階 2×8、RDL 4×6–8、保加利亞分腿蹲、腿彎舉、提踵 5 組", "臥推、槓鈴划船、下拉、側平舉，各 3 組", null, "硬舉 4×3–5、腿推（遞減組）、臀推、腿伸（遞減組）、坐姿提踵", "上斜推、坐姿划船、窄握划船、反向飛鳥、手臂，各 3 組", "前蹲或哈克深蹲、弓箭步、Nordic curl、提踵 5 組", null];
+  var MONTH_END = { "2026-10-31": 1, "2026-11-30": 1, "2026-12-31": 1 };
   function nightOf(wd, ph) {
-    if (ph === 1) return ["A醇", "杏仁酸", "A醇", "修護夜", "A醇", "杏仁酸", "修護夜"][wd];
-    return ["A醇", "修護夜", "A醇", "修護夜", "A醇", "杏仁酸", "A醇"][wd];
+    if (ph === 1) return ["A醇", "杏仁酸", "A醇", "修護夜", "A醇", "杏仁酸", "A醇"][wd];
+    if (ph === 2) return ["A醇", "修護夜", "A醇", "A醇", "A醇", "杏仁酸", "A醇"][wd];
+    return ["A醇", "A醇", "A醇", "A醇", "A醇", "杏仁酸", "A醇"][wd];
   }
   function itemsFor(i) {
-    var w = weekOfIdx(i), wd = i % 7, ph = phaseOf(w), exam = !!wk(w).exam;
+    var w = weekOfIdx(i), wd = i % 7, ph = phaseOf(w), exam = !!wk(w).exam, date = DAYS[i];
     var it = [];
     if (exam) {
-      if (wd === 0) it.push({ k: "train", t: "下肢 A（減量）", s: "組數減半、不加重", tag: "健身" });
-      if (wd === 3) it.push({ k: "train", t: "全身（減量）", s: "深蹲、臥推、划船各 2–3 組", tag: "健身" });
+      if (wd === 0) it.push({ k: "train", t: "下肢 A（考試週）", s: "強度不降，組數減三分之一", tag: "健身" });
+      if (wd === 2) it.push({ k: "train", t: "上肢（考試週）", s: "臥推、划船、下拉、側平舉各 2 組", tag: "健身" });
+      if (wd === 4) it.push({ k: "train", t: "下肢 B（考試週）", s: "強度不降，組數減三分之一", tag: "健身" });
     } else if (TRAIN[wd]) {
-      it.push({ k: "train", t: TRAIN[wd], s: TRAIN_SUB[wd], tag: "健身", opt: wd === 5 });
+      it.push({ k: "train", t: TRAIN[wd], s: TRAIN_SUB[wd], tag: "健身" });
+    } else if (wd === 2) {
+      it.push({ k: "recover", t: "主動恢復：坡度走 20 分鐘＋伸展", s: "髖屈肌、股四頭、腿後各伸展 2 分鐘", tag: "健身" });
     }
+    it.push({ k: "steps", t: exam ? "步數 7,000" : "步數 10,000", s: "通勤多走一站也算", tag: "健身" });
     it.push({ k: "protein", t: "蛋白質達標", s: "每公斤體重 1.5 g；肌酸 5 g", tag: "健身" });
     it.push({ k: "am", t: "早：洗臉 → 保濕 → 防曬", s: "陰天也要擦", tag: "護膚" });
     var night = nightOf(wd, ph);
     if (exam && night === "杏仁酸") night = "修護夜";
     it.push({ k: "pm", t: "晚：" + night, s: night === "修護夜" ? "只洗臉＋保濕" : "洗臉 → " + night + " → 保濕", tag: "護膚" });
+    it.push({ k: "sleep", t: "00:30 前上床", s: "睡前 30 分鐘不看盤、不滑短影音", tag: "護膚" });
     if (wd <= 4) it.push({ k: "code", t: exam ? "Python 15 分鐘（只複習）" : "Python 50 分鐘", s: codeTopic(w), tag: "程式" });
     if (wd === 5 && !exam) it.push({ k: "code", t: "Python 練習題／補進度", s: codeTopic(w), tag: "程式" });
+    if (wd <= 4 && !exam) it.push({ k: "premarket", t: "盤前計畫（9:00 前）", s: "最多 3 檔：進場價、停損價、部位先算好", tag: "交易" });
     if (wd <= 4) it.push({ k: "journal", t: "盤後交易紀錄", s: "每筆記 R 倍數、有沒有照規則", tag: "交易" });
-    if (wd === 6) it.push({ k: "journal", t: "週復盤 60 分鐘", s: "用模板寫，再到「每週紀錄」填數字", tag: "交易" });
-    if ((wd === 2 || wd === 5) && !exam) it.push({ k: "ootd", t: "拍 1 張 OOTD", s: styleTask(w), tag: "穿搭" });
-    it.push({ k: "read", t: exam ? "睡前閱讀 10 分鐘" : "睡前閱讀 20 分鐘", s: bookOf(w) + (wd === 6 ? " · 今天寫閱讀筆記" : ""), tag: "閱讀" });
+    if (wd === 5 && !exam) it.push({ k: "chain", t: "產業鏈研究 60 分鐘", s: "寫 1 篇：上中下游、龍頭、催化劑", tag: "交易" });
+    if (wd === 6) it.push({ k: "review", t: "週復盤 60 分鐘", s: "用模板寫，再到「每週紀錄」填數字", tag: "交易" });
+    if (MONTH_END[date]) it.push({ k: "monthly", t: "月報＋1,500 字閱讀長文", s: "交易月報：損益、R、規則遵守率；長文：當月一本書的一個觀點", tag: "交易" });
+    if ((wd === 0 || wd === 2 || wd === 5) && !exam) it.push({ k: "ootd", t: "拍 1 張 OOTD", s: styleTask(w), tag: "穿搭" });
+    if (wd === 6) it.push({ k: "groom", t: "儀容整理", s: "修眉、指甲、鼻毛、鞋子保養、燙好下週襯衫", tag: "穿搭" });
+    it.push({ k: "read", t: exam ? "閱讀 15 分鐘" : "閱讀 30 分鐘", s: bookOf(w) + (wd === 6 ? " · 今天寫閱讀筆記" : ""), tag: "閱讀" });
     return it;
   }
   var CODE = ["", "CS50P L0–1 · 函式、變數、條件", "CS50P L2–3 · 迴圈、例外", "CS50P L4–5 · 函式庫、單元測試", "CS50P L6–7 · 檔案、正規表達式", "CS50P L8–9 · 物件導向", "Big-O、list、stack、queue", "Linked list、hash table", "遞迴、排序、二分搜尋", "Tree、BST、走訪", "Heap、graph、BFS/DFS", "專案：pandas 回測", "專案收尾、README、GitHub"];
   function codeTopic(w) { return "本週：" + CODE[w]; }
-  function bookOf(w) { return w <= 5 ? "《被討厭的勇氣》" : w <= 9 ? "《交易心理分析》" : "《活出意義來》或《原子習慣》"; }
-  var STYLE = ["", "存參考圖、盤點衣櫃", "預約剪捲髮", "補襯衫、針織", "補襯衫、針織", "補褲子、修褲長", "補外套", "補鞋", "調整比例", "整理固定組合", "整理固定組合", "補配件", "拍成果照"];
+  function bookOf(w) { return w <= 3 ? "《被討厭的勇氣》" : w <= 6 ? "《交易心理分析》" : w <= 8 ? "《活出意義來》" : "《快思慢想》"; }
+  var STYLE = ["", "存 50 張參考圖、盤點衣櫃", "剪好捲髮髮型、練捲髮乳", "補襯衫、針織", "補褲子、修褲長", "補外套", "補鞋，膠囊衣櫥補齊", "找出比例問題並修正", "找出比例問題並修正", "西裝外套或 blazer", "香水、錶", "整理到 15 套組合", "拍成果照"];
   function styleTask(w) { return "本週：" + STYLE[w]; }
   var FOCUS = {
-    1: ["測深蹲 5RM、量大腿圍、拍體態照", "開始 A醇（一、三、五）", "存 30 張參考圖、盤點衣櫃", "寫交易規則書＋個人財務表", "CS50P L0–1", "開始《被討厭的勇氣》"],
-    2: ["動作練穩，RPE 7–8", "觀察有無刺痛脫皮", "剪一個順著捲度的髮型", "照規則交易、每天記錄", "CS50P L2–3", "每週一篇筆記"],
-    3: ["維持 RPE 7–8", "第一次 2 週對照照", "補清單前 3 項", "照規則交易", "CS50P L4–5、裝 Git", "繼續閱讀"],
-    4: ["W4 結束檢查點：拍照、量圍度", "維持輪替", "補襯衫、針織", "週復盤", "CS50P L6–7", "繼續閱讀"],
-    5: ["開始雙重漸進加重", "A醇加到週日", "補褲子、修褲長", "統計前 4 週數據", "CS50P L8–9", "讀完第一本"],
-    6: ["RPE 8–9", "觀察膚況", "補外套", "找出最賺／最虧的 setup", "Big-O、stack、queue", "開始《交易心理分析》"],
-    7: ["加重", "維持", "補鞋", "照數據調整", "Linked list、hash table", "繼續閱讀"],
-    8: ["W8 結束檢查點：量、拍照", "痘痘還在就約皮膚科", "看 OOTD 調整比例", "第二次統計", "遞迴、排序、二分搜尋", "繼續閱讀"],
-    9: ["衝最高重量", "維持", "整理固定組合", "只做有效 setup", "Tree、BST", "讀完第二本"],
-    10: ["衝最高重量", "維持", "整理到 10 套", "照規則交易", "Heap、graph", "開始第三本"],
-    11: ["最後一週重訓", "維持", "補配件", "開始寫年終報告", "pandas 回測專案", "繼續閱讀"],
-    12: ["減量，12/30 重測深蹲 5RM", "12/31 拍臉部對照照", "12/31 拍成果照", "年終報告", "README、推上 GitHub", "寫閱讀總結"]
+    1: ["測深蹲 5RM、硬舉 3RM、量大腿圍、拍照", "A醇一、三、五、日；杏仁酸二、六", "存 50 張參考圖、盤點衣櫃", "寫交易規則書＋個人財務表", "CS50P L0–1", "開始《被討厭的勇氣》"],
+    2: ["RPE 8，每組記重量次數", "觀察有無刺痛脫皮", "剪好髮、學會捲髮乳", "盤前計畫每天做", "CS50P L2–3", "每週一篇筆記"],
+    3: ["RPE 8，主項加重", "每週臉部對照照", "補襯衫、針織", "產業鏈筆記第 3 篇", "CS50P L4–5、裝 Git", "讀完第一本"],
+    4: ["W4 檢查點：拍照、量圍度", "痘痘還在就約皮膚科", "補褲子、修褲長", "10/31 第一份月報", "CS50P L6–7", "開始《交易心理分析》"],
+    5: ["RPE 8–9，孤立動作做到力竭", "A醇加到每週 5 晚", "補外套", "第一次 2 週統計", "CS50P L8–9", "繼續閱讀"],
+    6: ["RPE 8–9", "觀察膚況", "補鞋，膠囊衣櫥補齊", "砍掉負期望值 setup", "Big-O、stack、queue", "讀完第二本"],
+    7: ["加重", "維持", "每週修正 1 個比例問題", "第二次 2 週統計", "Linked list、hash table", "開始《活出意義來》"],
+    8: ["W8 檢查點：重測、拍照", "維持", "每週修正 1 個比例問題", "11/30 第二份月報", "遞迴、排序、二分搜尋", "讀完第三本"],
+    9: ["主項 RPE 9 衝重量", "A醇加到每週 6 晚", "西裝外套或 blazer", "只做有效 setup", "Tree、BST", "開始《快思慢想》"],
+    10: ["衝重量，孤立動作加遞減組", "維持", "香水、錶", "第三次 2 週統計", "Heap、graph", "繼續閱讀"],
+    11: ["最後一週重訓", "維持", "整理到 15 套組合", "開始寫年終報告", "pandas 回測專案", "繼續閱讀"],
+    12: ["12/28–29 減量，12/30 重測", "12/31 拍臉部對照照", "12/31 拍成果照", "年終報告＋12 月月報", "README、推上 GitHub", "讀完第四本、寫長文"]
   };
   var FOCUS_K = ["健身", "護膚", "穿搭", "交易", "程式", "閱讀"];
 
@@ -499,7 +524,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
   function level(p) { return p <= 0 ? 0 : p < 0.4 ? 1 : p < 0.7 ? 2 : p < 1 ? 3 : 4; }
   function trainCount() {
     var c = 0;
-    for (var i = 0; i < N; i++) { var rec = wk(weekOfIdx(i)).days[DAYS[i]]; if (rec && rec.train && i % 7 !== 2) c++; }
+    for (var i = 0; i < N; i++) { var rec = wk(weekOfIdx(i)).days[DAYS[i]]; if (rec && rec.train) c++; }
     return c;
   }
   function codeHours() { var h = 0; for (var w = 1; w <= WEEKS; w++) { var v = parseFloat(wk(w).m.hours); if (!isNaN(v)) h += v; } return h; }
@@ -535,7 +560,7 @@ footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
     $("prev").disabled = i === 0;
     $("next").disabled = i === N - 1;
     var nt = $("dayNotice");
-    if (beforeStart && i === 0) { nt.hidden = false; nt.textContent = "10/12 正式開始。這兩天先做準備：量體重和大腿圍、拍體態與臉部照、存穿搭參考圖、寫交易規則書。"; }
+    if (beforeStart && i === 0) { nt.hidden = false; nt.textContent = "10/12 正式開始。開始前先做準備：量體重和大腿圍、拍體態與臉部照、存穿搭參考圖、寫交易規則書、預約剪髮。"; }
     else if (todayIdx >= 0 && i > todayIdx) { nt.hidden = false; nt.textContent = "這天還沒到，可以先看要做什麼。"; }
     else nt.hidden = true;
     var rec = wk(w).days[date] || {};
