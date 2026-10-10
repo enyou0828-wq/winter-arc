@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Winter Arc 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a quiet ledger. Header with countdown + 4 numbers, then three tabs: today's checklist, the 12-week plan, weekly numbers. Old-money palette: bottle green ink on cool paper, brass for highlights. */
+:root {
+  --bg: #eef0ec;
+  --surface: #f9faf7;
+  --ink: #17221d;
+  --muted: #5b6862;
+  --line: #d6dbd4;
+  --accent: #1f4a37;
+  --accent-soft: #dde8e1;
+  --brass: #8c6a32;
+  --brass-soft: #f1e9da;
+  --warn: #9a4a2a;
+  --cell-0: #e2e6e0;
+  --cell-1: #b9cfc2;
+  --cell-2: #7fa792;
+  --cell-3: #3f7259;
+  --cell-4: #1f4a37;
+  --f-display: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --f-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1412; --surface: #151d1a; --ink: #e5eae5; --muted: #98a59e; --line: #29352f;
+    --accent: #86b89f; --accent-soft: #1f2e27; --brass: #cfac6c; --brass-soft: #2b251a; --warn: #e08a63;
+    --cell-0: #1d2622; --cell-1: #27453a; --cell-2: #3b6b55; --cell-3: #5e9a7d; --cell-4: #8fc4a8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1412; --surface: #151d1a; --ink: #e5eae5; --muted: #98a59e; --line: #29352f;
+  --accent: #86b89f; --accent-soft: #1f2e27; --brass: #cfac6c; --brass-soft: #2b251a; --warn: #e08a63;
+  --cell-0: #1d2622; --cell-1: #27453a; --cell-2: #3b6b55; --cell-3: #5e9a7d; --cell-4: #8fc4a8;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.65; }
+.wrap { max-width: 920px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: .01em; }
+h1 { font-size: clamp(30px, 6vw, 44px); line-height: 1.15; }
+h2 { font-size: 22px; line-height: 1.3; }
+h3 { font-size: 17px; line-height: 1.4; }
+p { margin: 0; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--brass); }
+.muted { color: var(--muted); }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* header */
+header { display: grid; gap: 18px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.head-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; }
+.sync { font-size: 12px; color: var(--muted); font-family: var(--f-mono); }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.stat { background: var(--surface); padding: 12px 14px; display: grid; gap: 2px; min-width: 0; }
+.stat .k { font-size: 12px; color: var(--muted); }
+.stat .v { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 22px; font-weight: 500; }
+.stat .v small { font-size: 13px; color: var(--muted); font-weight: 400; }
+.bar { height: 4px; border-radius: 2px; background: var(--cell-0); overflow: hidden; margin-top: 4px; }
+.bar i { display: block; height: 100%; background: var(--accent); }
+@media (max-width: 620px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* tabs */
+nav.tabs { display: flex; gap: 4px; margin: 22px 0 20px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+nav.tabs button { font: inherit; font-size: 15px; background: none; border: 0; padding: 10px 14px; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+nav.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 700; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+
+/* today */
+.today-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 760px) { .today-grid { grid-template-columns: 1fr; } }
+.daynav { display: flex; align-items: center; gap: 8px; justify-content: space-between; margin-bottom: 12px; }
+.daynav button { font: inherit; background: var(--surface); border: 1px solid var(--line); color: var(--ink); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+.daynav button:disabled { opacity: .35; cursor: default; }
+.dayhead { text-align: center; min-width: 0; }
+.dayhead .d { font-family: var(--f-display); font-size: 20px; font-weight: 700; }
+.dayhead .s { font-size: 12px; color: var(--muted); }
+.notice { background: var(--brass-soft); color: var(--ink); border-radius: 8px; padding: 10px 12px; font-size: 13px; margin-bottom: 12px; }
+.checks { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.checks li + li { border-top: 1px solid var(--line); }
+.checks label { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 12px 14px; cursor: pointer; }
+.checks input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--accent); cursor: pointer; }
+.checks .t { font-weight: 500; }
+.checks .sub { font-size: 13px; color: var(--muted); }
+.checks .tag { font-family: var(--f-mono); font-size: 11px; color: var(--brass); letter-spacing: .06em; padding-top: 3px; white-space: nowrap; }
+.checks input:checked ~ .body .t { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+.daypct { margin-top: 10px; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; }
+
+.side h3 { margin-bottom: 10px; }
+.heat { display: grid; grid-template-columns: 34px repeat(7, minmax(0, 1fr)); gap: 4px; font-size: 11px; }
+.heat .hd { color: var(--muted); text-align: center; font-family: var(--f-mono); }
+.heat .wk { color: var(--muted); font-family: var(--f-mono); align-self: center; }
+.heat button { aspect-ratio: 1; max-width: 100%; border: 0; border-radius: 4px; background: var(--cell-0); cursor: pointer; padding: 0; }
+.heat button[data-l="1"] { background: var(--cell-1); }
+.heat button[data-l="2"] { background: var(--cell-2); }
+.heat button[data-l="3"] { background: var(--cell-3); }
+.heat button[data-l="4"] { background: var(--cell-4); }
+.heat button.sel { outline: 2px solid var(--brass); outline-offset: 1px; }
+.heat button.future { opacity: .45; }
+.heat .wk.exam { color: var(--warn); }
+.legend { display: flex; gap: 6px; align-items: center; font-size: 11px; color: var(--muted); margin-top: 8px; }
+.legend span.c { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.weekfocus { margin-top: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 8px; font-size: 14px; }
+.weekfocus dt { font-size: 12px; color: var(--brass); font-family: var(--f-mono); letter-spacing: .06em; }
+.weekfocus dd { margin: 0 0 4px; }
+
+/* plan */
+.plan { display: grid; gap: 40px; }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.timeline > div { border-top: 3px solid var(--accent); padding-top: 10px; display: grid; gap: 4px; min-width: 0; }
+.timeline > div:nth-child(2) { border-top-color: var(--brass); }
+.timeline > div:nth-child(3) { border-top-color: var(--ink); }
+@media (max-width: 620px) { .timeline { grid-template-columns: 1fr; } }
+section.area { display: grid; gap: 14px; }
+.area-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.kpi { display: flex; flex-wrap: wrap; gap: 6px; }
+.kpi span { background: var(--accent-soft); color: var(--ink); border-radius: 999px; padding: 3px 10px; font-size: 13px; }
+.phases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.phases > div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.phases b { display: block; font-family: var(--f-mono); font-size: 12px; color: var(--brass); font-weight: 500; letter-spacing: .04em; margin-bottom: 4px; }
+@media (max-width: 760px) { .phases { grid-template-columns: 1fr; } }
+ul.tight { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 12px; color: var(--muted); font-weight: 500; white-space: nowrap; }
+td.n { font-family: var(--f-mono); white-space: nowrap; color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); }
+.cols2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 620px) { .cols2 { grid-template-columns: 1fr; } }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.box h3 { font-size: 15px; margin-bottom: 6px; }
+
+/* weeks */
+.weeks { display: grid; gap: 12px; }
+.wcard { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 12px; }
+.wcard.cur { border-color: var(--accent); }
+.wtop { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline; }
+.wtop .r { display: flex; gap: 12px; align-items: center; font-size: 13px; color: var(--muted); }
+.exam-toggle { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+.exam-toggle input { accent-color: var(--warn); }
+.fields { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 760px) { .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.fields label { display: grid; gap: 4px; font-size: 12px; color: var(--muted); min-width: 0; }
+.fields input, .wcard textarea { font: inherit; font-size: 14px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; width: 100%; min-width: 0; }
+.fields input { font-family: var(--f-mono); }
+.wcard textarea { resize: vertical; min-height: 54px; }
+.wcard .reviewlbl { font-size: 12px; color: var(--muted); display: grid; gap: 4px; }
+footer { margin-top: 48px; font-size: 12px; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { .bar i { transition: width .3s ease; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="head-top">
+      <div>
+        <p class="eyebrow">10/12 — 12/31 · 12 週</p>
+        <h1>Winter Arc 2026</h1>
+      </div>
+      <p class="sync" id="sync">紀錄只存在這台裝置</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="k" id="st-day-k">進度</span><span class="v" id="st-day">—</span><div class="bar"><i id="st-day-bar" style="width:0%"></i></div></div>
+      <div class="stat"><span class="k">打卡完成率</span><span class="v" id="st-rate">—</span><div class="bar"><i id="st-rate-bar" style="width:0%"></i></div></div>
+      <div class="stat"><span class="k">訓練次數（目標 45–55）</span><span class="v" id="st-train">—</span><div class="bar"><i id="st-train-bar" style="width:0%"></i></div></div>
+      <div class="stat"><span class="k">程式時數（目標 50）</span><span class="v" id="st-code">—</span><div class="bar"><i id="st-code-bar" style="width:0%"></i></div></div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-today" aria-selected="true" data-tab="today">每日打卡</button>
+    <button role="tab" id="tab-plan" aria-selected="false" data-tab="plan">12 週計畫</button>
+    <button role="tab" id="tab-weeks" aria-selected="false" data-tab="weeks">每週紀錄</button>
+  </nav>
+
+  <!-- TODAY -->
+  <div id="panel-today" role="tabpanel">
+    <div class="today-grid">
+      <div>
+        <div class="daynav">
+          <button id="prev" aria-label="前一天">‹</button>
+          <div class="dayhead"><div class="d" id="dayTitle">—</div><div class="s" id="daySub">—</div></div>
+          <button id="next" aria-label="後一天">›</button>
+        </div>
+        <div class="notice" id="dayNotice" hidden></div>
+        <ul class="checks" id="checks"></ul>
+        <div class="daypct"><span id="dayPct">—</span><span id="dayPhase">—</span></div>
+      </div>
+      <div class="side">
+        <h3>12 週打卡熱度</h3>
+        <div class="heat" id="heat"></div>
+        <div class="legend">少 <span class="c" style="background:var(--cell-0)"></span><span class="c" style="background:var(--cell-1)"></span><span class="c" style="background:var(--cell-2)"></span><span class="c" style="background:var(--cell-3)"></span><span class="c" style="background:var(--cell-4)"></span> 多 · 紅色週次＝考試週</div>
+        <dl class="weekfocus" id="weekFocus"></dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAN -->
+  <div id="panel-plan" role="tabpanel" hidden>
+    <div class="plan">
+
+      <section class="area">
+        <div class="area-head"><h2>三個階段</h2><span class="muted">每 4 週一個檢查點</span></div>
+        <div class="timeline">
+          <div><span class="eyebrow">P1 · W1–W4</span><h3>打底</h3><p class="mono muted">10/12 – 11/8</p><p>建立習慣、學動作、記錄基準。重量和強度先保守。</p></div>
+          <div><span class="eyebrow">P2 · W5–W8</span><h3>推進</h3><p class="mono muted">11/9 – 12/6</p><p>加重量、加頻率、開始看數據。期中考週切換成減量版。</p></div>
+          <div><span class="eyebrow">P3 · W9–W12</span><h3>收尾</h3><p class="mono muted">12/7 – 12/31</p><p>衝刺、做出成品、拍成果照，12/31 寫年終檢討。</p></div>
+        </div>
+        <p class="note">檢查點：11/8（W4 結束）、12/6（W8 結束）、12/31。每個檢查點對照照片、數字和每週紀錄，決定下一階段要加還是要減。</p>
+      </section>
+
+      <section class="area">
+        <div class="area-head"><h2>每週課表</h2><span class="muted">打卡頁每天的項目就是照這張表產生</span></div>
+        <div class="tbl"><table>
+          <thead><tr><th></th><th>訓練</th><th>晚間保養（P1）</th><th>程式</th><th>交易</th><th>其他</th></tr></thead>
+          <tbody>
+            <tr><td class="n">一</td><td>下肢 A · 力量</td><td>A醇</td><td>Python 50′</td><td>盤後紀錄</td><td>閱讀 20′</td></tr>
+            <tr><td class="n">二</td><td>上肢 A · 維持</td><td>杏仁酸</td><td>Python 50′</td><td>盤後紀錄</td><td>閱讀 20′</td></tr>
+            <tr><td class="n">三</td><td>休息 · 走 8,000 步</td><td>A醇</td><td>Python 50′</td><td>盤後紀錄</td><td>OOTD、閱讀</td></tr>
+            <tr><td class="n">四</td><td>下肢 B · 肌肥大</td><td>修護（只保濕）</td><td>Python 50′</td><td>盤後紀錄</td><td>閱讀 20′</td></tr>
+            <tr><td class="n">五</td><td>上肢 B · 維持</td><td>A醇</td><td>Python 50′</td><td>盤後紀錄</td><td>閱讀 20′</td></tr>
+            <tr><td class="n">六</td><td>下肢 C · 輕量（可選）</td><td>杏仁酸</td><td>練習題／補進度</td><td>—</td><td>OOTD、逛街或整理衣櫃</td></tr>
+            <tr><td class="n">日</td><td>休息</td><td>修護（只保濕）</td><td>—</td><td>週復盤 60′</td><td>閱讀筆記、填每週紀錄</td></tr>
+          </tbody>
+        </table></div>
+        <div class="box">
+          <h3>考試週減量版（在「每週紀錄」勾選考試週即自動切換）</h3>
+          <ul class="tight">
+            <li>訓練只留 2 次：週一下肢 A、週四全身，組數減半、不加重。</li>
+            <li>保養只做早晚基本＋防曬，暫停酸類，A醇照常。</li>
+            <li>程式每天 15 分鐘，只複習，不學新章節。</li>
+            <li>閱讀改成睡前 10 分鐘；交易部位減半或空手。</li>
+            <li>這一週照減量版做完就算達標，不算中斷。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="area" id="p-fit">
+        <div class="area-head"><h2>健身 · 下半身主攻</h2><span class="muted">下肢每週 2 次重訓＋1 次輕量，上肢每週 2 次維持</span></div>
+        <div class="kpi"><span>訓練 45–55 次</span><span>深蹲 5RM ＋7.5–12.5 kg</span><span>大腿圍每 4 週量一次</span><span>每 2 週拍體態照</span></div>
+        <div class="tbl"><table>
+          <thead><tr><th>課表</th><th>動作</th><th>組 × 次</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="5">下肢 A<br><span class="note">力量</span></td><td>Back squat</td><td class="n">4 × 5</td></tr>
+            <tr><td>Romanian deadlift</td><td class="n">3 × 6–8</td></tr>
+            <tr><td>Bulgarian split squat</td><td class="n">3 × 8 / 腿</td></tr>
+            <tr><td>Leg curl</td><td class="n">3 × 10–12</td></tr>
+            <tr><td>站姿提踵</td><td class="n">4 × 8–10</td></tr>
+            <tr><td rowspan="6">下肢 B<br><span class="note">肌肥大</span></td><td>Deadlift（或六角槓）</td><td class="n">3 × 3–5</td></tr>
+            <tr><td>Leg press</td><td class="n">3 × 10–15</td></tr>
+            <tr><td>Hip thrust</td><td class="n">3 × 8–10</td></tr>
+            <tr><td>Leg extension</td><td class="n">3 × 12–15</td></tr>
+            <tr><td>坐姿提踵</td><td class="n">3 × 12–15</td></tr>
+            <tr><td>懸吊舉腿</td><td class="n">3 × 10–12</td></tr>
+            <tr><td rowspan="3">下肢 C<br><span class="note">輕量，可選</span></td><td>Walking lunge</td><td class="n">3 × 12 / 腿</td></tr>
+            <tr><td>Leg curl 或 Nordic curl</td><td class="n">3 × 8–10</td></tr>
+            <tr><td>提踵</td><td class="n">4 × 15</td></tr>
+            <tr><td>上肢 A</td><td>Bench press、Barbell row、High pulldown、側平舉</td><td class="n">各 2–3 組</td></tr>
+            <tr><td>上肢 B</td><td>上斜啞鈴推、Cable row、Narrow grip row、Reverse fly、二頭三頭</td><td class="n">各 2–3 組</td></tr>
+          </tbody>
+        </table></div>
+        <div class="phases">
+          <div><b>P1 · W1–4</b>RPE 7–8，先把深蹲、硬舉的動作練穩。W1 測一次深蹲 5RM、量大腿圍、拍照當基準。</div>
+          <div><b>P2 · W5–8</b>RPE 8–9，雙重漸進：每組都做到次數上限，下次加 2.5 kg。W8 結束再量一次。</div>
+          <div><b>P3 · W9–12</b>W9–11 衝最高重量，W12 減量。12/30 重測深蹲 5RM，12/31 拍成果照。</div>
+        </div>
+        <p class="note">每週組數目標：股四頭 12–16 組、腿後 10–12 組、臀 10 組以上、小腿 8–12 組。飲食：蛋白質每公斤體重 1.5 g，熱量維持或只少 200–300 kcal，下半身才長得起來。肌酸每天 5 g。</p>
+      </section>
+
+      <section class="area" id="p-skin">
+        <div class="area-head"><h2>護膚</h2><span class="muted">冬天先顧好屏障，再談 A醇和酸</span></div>
+        <div class="kpi"><span>防曬每天擦</span><span>每 2 週同光線拍臉部照</span><span>W8 評估是否看皮膚科</span></div>
+        <div class="cols2">
+          <div class="box"><h3>早上（每天）</h3><p>溫和洗面乳 → 保濕 → 防曬 SPF30+ / PA+++。陰天、在室內也要擦，A醇沒配防曬會白做。</p></div>
+          <div class="box"><h3>晚上（輪替）</h3><p>洗臉 → 當晚的活性成分 → 保濕。A醇和杏仁酸絕對不要同一晚疊用。</p></div>
+        </div>
+        <div class="phases">
+          <div><b>P1 · W1–4</b>A醇週一、三、五；杏仁酸週二、六；週四、日修護夜只保濕。</div>
+          <div><b>P2 · W5–8</b>沒有脫皮刺痛就把 A醇加到週日；杏仁酸減為週六一次。W8 若還有發炎型痘痘，就預約皮膚科。</div>
+          <div><b>P3 · W9–12</b>維持 P2 的頻率，不再加新產品。12/31 拍照對照 10/12。</div>
+        </div>
+        <p class="note">出現刺痛、泛紅、脫皮：停掉所有活性成分 3 天，只做保濕。抬頭紋主要靠 A醇加防曬長期改善；冬天記得護唇和身體乳。</p>
+      </section>
+
+      <section class="area" id="p-style">
+        <div class="area-head"><h2>穿搭 · Clean fit / Old money</h2><span class="muted">合身優先於品牌，質感優先於數量</span></div>
+        <div class="kpi"><span>10 套可穿的組合</span><span>每週 2 張 OOTD</span><span>剪一次適合捲髮的髮型</span></div>
+        <div class="cols2">
+          <div class="box"><h3>原則</h3>
+            <ul class="tight">
+              <li>顏色：海軍藍、駝色、灰、米白、橄欖綠、深咖啡。全身不超過 3 色。</li>
+              <li>材質：羊毛、美麗諾、牛津布、厚棉、麂皮。不要大 logo。</li>
+              <li>175 cm：高腰褲加同色系上下身，視覺上會比較修長。褲長修到剛好碰鞋面。</li>
+              <li>配件：素面皮帶跟鞋子同色；錶選簡單皮錶帶款，Tank 留給以後。</li>
+            </ul>
+          </div>
+          <div class="box"><h3>冬季膠囊衣櫥（照順序補）</h3>
+            <ul class="tight">
+              <li>白色、淺藍牛津襯衫 ×2</li>
+              <li>美麗諾針織（圓領或半拉鍊）×2：海軍藍、駝色</li>
+              <li>灰色、卡其打褶西裝褲或 chino ×2</li>
+              <li>深色直筒丹寧 ×1</li>
+              <li>外套 ×1：海軍藍哈靈頓、羊毛 overshirt 或短大衣</li>
+              <li>麂皮樂福鞋或 chukka ×1、白色皮革球鞋 ×1</li>
+              <li>厚磅素 T ×3：白、海軍藍、灰</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phases">
+          <div><b>P1 · W1–4</b>W1 存 30 張參考圖，找出共通點；盤點衣櫃，捐掉不合身的。W2 找會剪捲髮的設計師（兩側收短、頂部留捲度）。W3–4 開始補清單前 3 項。</div>
+          <div><b>P2 · W5–8</b>補完褲子、外套、鞋；褲長拿去修改。每週三、六各拍 1 張 OOTD，看照片調整比例。</div>
+          <div><b>P3 · W9–12</b>整理出 10 套固定組合（拍照存相簿），補配件。12/31 拍成果照。</div>
+        </div>
+        <p class="note">預算先自己定一個上限，照清單順序買，買到哪就停在哪。基本款 UNIQLO／MUJI 就夠，預算多再升級到 COS、Massimo Dutti 的針織和外套。</p>
+      </section>
+
+      <section class="area" id="p-trade">
+        <div class="area-head"><h2>交易</h2><span class="muted">這 12 週先求守住，再求翻身</span></div>
+        <div class="kpi"><span>12 篇週復盤</span><span>規則遵守 ≥ 90%</span><span>最大回撤 &lt; 10%</span><span>12/31 年終報告</span></div>
+        <div class="cols2">
+          <div class="box"><h3>硬規則</h3>
+            <ul class="tight">
+              <li>單筆風險 ≤ 總資金 1%：先定停損，再回推部位大小。</li>
+              <li>單日虧損 2% 停止交易；單週虧損 5%，下週部位減半。</li>
+              <li>只做主流族群＋有量的突破＋大盤環境配合。</li>
+              <li>不攤平、不凹單。停損到了就出場。</li>
+            </ul>
+          </div>
+          <div class="box"><h3>週日復盤模板</h3>
+            <ul class="tight">
+              <li>本週損益、R 倍數、規則遵守幾筆／總幾筆</li>
+              <li>最好的一筆和最差的一筆：各做對、做錯什麼</li>
+              <li>本週主流族群和資金流向</li>
+              <li>本週研究的一條產業鏈（可以接 supply-chain-map）</li>
+              <li>下週只改一件事</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phases">
+          <div><b>P1 · W1–4</b>W1 寫好交易規則書和個人財務表（資產、負債、每月收支）。每筆交易記在 trading-journal。</div>
+          <div><b>P2 · W5–8</b>統計前 4 週：勝率、平均賺賠比、平均 R、各 setup 的表現。找出最賺和最虧的情境。</div>
+          <div><b>P3 · W9–12</b>只做數據證明有效的 setup。12/31 寫年終報告：資金曲線、最大回撤、規則遵守率、2027 的規則修訂。</div>
+        </div>
+      </section>
+
+      <section class="area" id="p-code">
+        <div class="area-head"><h2>科技 · Python 與資料結構</h2><span class="muted">平日每天 50 分鐘＋週六補進度，約 4.5 小時／週</span></div>
+        <div class="kpi"><span>50 小時</span><span>CS50P 作業全部完成</span><span>LeetCode Easy 30 題</span><span>1 個專案上 GitHub</span></div>
+        <div class="tbl"><table>
+          <thead><tr><th>週</th><th>內容</th><th>產出</th></tr></thead>
+          <tbody>
+            <tr><td class="n">W1</td><td>CS50P Lecture 0–1：函式、變數、條件</td><td>Problem Set 0–1</td></tr>
+            <tr><td class="n">W2</td><td>Lecture 2–3：迴圈、例外處理</td><td>Problem Set 2–3</td></tr>
+            <tr><td class="n">W3</td><td>Lecture 4–5：函式庫、單元測試</td><td>Problem Set 4–5、裝好 Git</td></tr>
+            <tr><td class="n">W4</td><td>Lecture 6–7：檔案讀寫、正規表達式</td><td>Problem Set 6–7</td></tr>
+            <tr><td class="n">W5</td><td>Lecture 8–9：物件導向、其他</td><td>Problem Set 8–9</td></tr>
+            <tr><td class="n">W6</td><td>Big-O、陣列與 list、stack、queue</td><td>LeetCode 5 題</td></tr>
+            <tr><td class="n">W7</td><td>Linked list、hash table（dict / set）</td><td>LeetCode 5 題</td></tr>
+            <tr><td class="n">W8</td><td>遞迴、排序（merge / quick）、二分搜尋</td><td>LeetCode 5 題</td></tr>
+            <tr><td class="n">W9</td><td>Tree、BST、走訪</td><td>LeetCode 5 題</td></tr>
+            <tr><td class="n">W10</td><td>Heap、graph、BFS / DFS</td><td>LeetCode 5 題</td></tr>
+            <tr><td class="n">W11</td><td>專案：用 pandas 回測自己的突破打法</td><td>回測出勝率、賺賠比、最大回撤</td></tr>
+            <tr><td class="n">W12</td><td>專案收尾、寫 README、推上 GitHub</td><td>專案＋學習心得</td></tr>
+          </tbody>
+        </table></div>
+        <div class="cols2">
+          <div class="box"><h3>教材</h3>
+            <ul class="tight">
+              <li><a href="https://cs50.harvard.edu/python/" target="_blank" rel="noopener">CS50P（Harvard，免費）</a>：W1–W5</li>
+              <li><a href="https://runestone.academy/ns/books/published/pythonds3/index.html" target="_blank" rel="noopener">Problem Solving with Algorithms and Data Structures using Python</a>：W6–W10</li>
+              <li><a href="https://neetcode.io/practice" target="_blank" rel="noopener">NeetCode</a>：照主題挑 Easy 題</li>
+            </ul>
+          </div>
+          <div class="box"><h3>規則</h3>
+            <ul class="tight">
+              <li>程式自己打。AI 只用來解釋錯誤訊息和觀念，不直接生成答案。</li>
+              <li>每次練完 commit 一次，用 GitHub 綠格子當第二個打卡表。</li>
+              <li>時數每週日填在「每週紀錄」，上方會自動加總。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="area" id="p-read">
+        <div class="area-head"><h2>閱讀</h2><span class="muted">睡前 20 分鐘讀紙本，取代滑手機</span></div>
+        <div class="kpi"><span>至少 2 本，挑戰 3 本</span><span>每週 1 篇閱讀筆記，共 12 篇</span></div>
+        <div class="tbl"><table>
+          <thead><tr><th>期間</th><th>書</th><th>為什麼選這本</th></tr></thead>
+          <tbody>
+            <tr><td class="n">W1–W5</td><td>《被討厭的勇氣》</td><td>對應「減少反覆自我評價」和人際焦慮，對話體，好讀。</td></tr>
+            <tr><td class="n">W6–W9</td><td>《交易心理分析》（Mark Douglas）</td><td>對應交易紀律，跟每週復盤一起讀。</td></tr>
+            <tr><td class="n">W10–W12</td><td>《活出意義來》（Frankl）或《原子習慣》</td><td>篇幅短，適合期末前收尾；二選一。</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note">每週筆記格式：3 個重點、1 個不同意或有疑問的地方、1 個下週要做的行動。考試週改成睡前 10 分鐘。</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- WEEKS -->
+  <div id="panel-weeks" role="tabpanel" hidden>
+    <p class="note" style="margin-bottom:14px">每週日復盤時填寫。欄位離開時自動儲存；勾選「考試週」會把那一週的打卡項目換成減量版。</p>
+    <div class="weeks" id="weeks"></div>
+  </div>
+
+  <footer>Winter Arc 2026 · 10/12（一）到 12/31（四），共 81 天</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var START = new Date(2026, 9, 12);
+  var END = new Date(2026, 11, 31);
+  function ds(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  var DAYS = [];
+  for (var d = new Date(START); d <= END; d.setDate(d.getDate() + 1)) DAYS.push(ds(d));
+  var N = DAYS.length;
+  var WEEKS = Math.ceil(N / 7);
+  var WD = ["一", "二", "三", "四", "五", "六", "日"];
+  function wid(w) { return "w" + String(w).padStart(2, "0"); }
+  function weekOfIdx(i) { return Math.floor(i / 7) + 1; }
+  function phaseOf(w) { return w <= 4 ? 1 : w <= 8 ? 2 : 3; }
+  function md(s) { var p = s.split("-"); return (+p[1]) + "/" + (+p[2]); }
+
+  var todayStr = ds(new Date());
+  var todayIdx = DAYS.indexOf(todayStr);
+  var beforeStart = todayStr < DAYS[0];
+  var afterEnd = todayStr > DAYS[N - 1];
+  var sel = todayIdx >= 0 ? todayIdx : (afterEnd ? N - 1 : 0);
+
+  // ---- state ----
+  var state = {}; // wid -> {days:{date:{key:true}}, exam:bool, m:{...}}
+  var LS = "winter-arc-2026";
+  try { var raw = localStorage.getItem(LS); if (raw) state = JSON.parse(raw) || {}; } catch (e) {}
+  function wk(w) { var k = wid(w); if (!state[k]) state[k] = { days: {}, exam: false, m: {} }; if (!state[k].days) state[k].days = {}; if (!state[k].m) state[k].m = {}; return state[k]; }
+  function lsSave() { try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {} }
+
+  // ---- daily items ----
+  var TRAIN = ["下肢 A · 力量", "上肢 A · 維持", "休息日：走 8,000 步", "下肢 B · 肌肥大", "上肢 B · 維持", "下肢 C · 輕量", null];
+  var TRAIN_SUB = ["深蹲 4×5、RDL、保加利亞分腿蹲、腿彎舉、提踵", "臥推、槓鈴划船、下拉、側平舉，各 2–3 組", "不進健身房，靠步數", "硬舉、腿推、臀推、腿伸、坐姿提踵", "上斜推、坐姿划船、窄握划船、反向飛鳥、手臂", "弓箭步、腿彎舉、提踵；累了可以跳過", null];
+  function nightOf(wd, ph) {
+    if (ph === 1) return ["A醇", "杏仁酸", "A醇", "修護夜", "A醇", "杏仁酸", "修護夜"][wd];
+    return ["A醇", "修護夜", "A醇", "修護夜", "A醇", "杏仁酸", "A醇"][wd];
+  }
+  function itemsFor(i) {
+    var w = weekOfIdx(i), wd = i % 7, ph = phaseOf(w), exam = !!wk(w).exam;
+    var it = [];
+    if (exam) {
+      if (wd === 0) it.push({ k: "train", t: "下肢 A（減量）", s: "組數減半、不加重", tag: "健身" });
+      if (wd === 3) it.push({ k: "train", t: "全身（減量）", s: "深蹲、臥推、划船各 2–3 組", tag: "健身" });
+    } else if (TRAIN[wd]) {
+      it.push({ k: "train", t: TRAIN[wd], s: TRAIN_SUB[wd], tag: "健身", opt: wd === 5 });
+    }
+    it.push({ k: "protein", t: "蛋白質達標", s: "每公斤體重 1.5 g；肌酸 5 g", tag: "健身" });
+    it.push({ k: "am", t: "早：洗臉 → 保濕 → 防曬", s: "陰天也要擦", tag: "護膚" });
+    var night = nightOf(wd, ph);
+    if (exam && night === "杏仁酸") night = "修護夜";
+    it.push({ k: "pm", t: "晚：" + night, s: night === "修護夜" ? "只洗臉＋保濕" : "洗臉 → " + night + " → 保濕", tag: "護膚" });
+    if (wd <= 4) it.push({ k: "code", t: exam ? "Python 15 分鐘（只複習）" : "Python 50 分鐘", s: codeTopic(w), tag: "程式" });
+    if (wd === 5 && !exam) it.push({ k: "code", t: "Python 練習題／補進度", s: codeTopic(w), tag: "程式" });
+    if (wd <= 4) it.push({ k: "journal", t: "盤後交易紀錄", s: "每筆記 R 倍數、有沒有照規則", tag: "交易" });
+    if (wd === 6) it.push({ k: "journal", t: "週復盤 60 分鐘", s: "用模板寫，再到「每週紀錄」填數字", tag: "交易" });
+    if ((wd === 2 || wd === 5) && !exam) it.push({ k: "ootd", t: "拍 1 張 OOTD", s: styleTask(w), tag: "穿搭" });
+    it.push({ k: "read", t: exam ? "睡前閱讀 10 分鐘" : "睡前閱讀 20 分鐘", s: bookOf(w) + (wd === 6 ? " · 今天寫閱讀筆記" : ""), tag: "閱讀" });
+    return it;
+  }
+  var CODE = ["", "CS50P L0–1 · 函式、變數、條件", "CS50P L2–3 · 迴圈、例外", "CS50P L4–5 · 函式庫、單元測試", "CS50P L6–7 · 檔案、正規表達式", "CS50P L8–9 · 物件導向", "Big-O、list、stack、queue", "Linked list、hash table", "遞迴、排序、二分搜尋", "Tree、BST、走訪", "Heap、graph、BFS/DFS", "專案：pandas 回測", "專案收尾、README、GitHub"];
+  function codeTopic(w) { return "本週：" + CODE[w]; }
+  function bookOf(w) { return w <= 5 ? "《被討厭的勇氣》" : w <= 9 ? "《交易心理分析》" : "《活出意義來》或《原子習慣》"; }
+  var STYLE = ["", "存參考圖、盤點衣櫃", "預約剪捲髮", "補襯衫、針織", "補襯衫、針織", "補褲子、修褲長", "補外套", "補鞋", "調整比例", "整理固定組合", "整理固定組合", "補配件", "拍成果照"];
+  function styleTask(w) { return "本週：" + STYLE[w]; }
+  var FOCUS = {
+    1: ["測深蹲 5RM、量大腿圍、拍體態照", "開始 A醇（一、三、五）", "存 30 張參考圖、盤點衣櫃", "寫交易規則書＋個人財務表", "CS50P L0–1", "開始《被討厭的勇氣》"],
+    2: ["動作練穩，RPE 7–8", "觀察有無刺痛脫皮", "剪一個順著捲度的髮型", "照規則交易、每天記錄", "CS50P L2–3", "每週一篇筆記"],
+    3: ["維持 RPE 7–8", "第一次 2 週對照照", "補清單前 3 項", "照規則交易", "CS50P L4–5、裝 Git", "繼續閱讀"],
+    4: ["W4 結束檢查點：拍照、量圍度", "維持輪替", "補襯衫、針織", "週復盤", "CS50P L6–7", "繼續閱讀"],
+    5: ["開始雙重漸進加重", "A醇加到週日", "補褲子、修褲長", "統計前 4 週數據", "CS50P L8–9", "讀完第一本"],
+    6: ["RPE 8–9", "觀察膚況", "補外套", "找出最賺／最虧的 setup", "Big-O、stack、queue", "開始《交易心理分析》"],
+    7: ["加重", "維持", "補鞋", "照數據調整", "Linked list、hash table", "繼續閱讀"],
+    8: ["W8 結束檢查點：量、拍照", "痘痘還在就約皮膚科", "看 OOTD 調整比例", "第二次統計", "遞迴、排序、二分搜尋", "繼續閱讀"],
+    9: ["衝最高重量", "維持", "整理固定組合", "只做有效 setup", "Tree、BST", "讀完第二本"],
+    10: ["衝最高重量", "維持", "整理到 10 套", "照規則交易", "Heap、graph", "開始第三本"],
+    11: ["最後一週重訓", "維持", "補配件", "開始寫年終報告", "pandas 回測專案", "繼續閱讀"],
+    12: ["減量，12/30 重測深蹲 5RM", "12/31 拍臉部對照照", "12/31 拍成果照", "年終報告", "README、推上 GitHub", "寫閱讀總結"]
+  };
+  var FOCUS_K = ["健身", "護膚", "穿搭", "交易", "程式", "閱讀"];
+
+  // ---- scoring ----
+  function dayScore(i) {
+    var w = weekOfIdx(i), its = itemsFor(i), rec = wk(w).days[DAYS[i]] || {};
+    var req = 0, done = 0;
+    its.forEach(function (x) { if (!x.opt) { req++; if (rec[x.k]) done++; } });
+    return req ? done / req : 0;
+  }
+  function level(p) { return p <= 0 ? 0 : p < 0.4 ? 1 : p < 0.7 ? 2 : p < 1 ? 3 : 4; }
+  function trainCount() {
+    var c = 0;
+    for (var i = 0; i < N; i++) { var rec = wk(weekOfIdx(i)).days[DAYS[i]]; if (rec && rec.train && i % 7 !== 2) c++; }
+    return c;
+  }
+  function codeHours() { var h = 0; for (var w = 1; w <= WEEKS; w++) { var v = parseFloat(wk(w).m.hours); if (!isNaN(v)) h += v; } return h; }
+
+  // ---- render ----
+  var $ = function (id) { return document.getElementById(id); };
+  function renderStats() {
+    var elapsed = beforeStart ? 0 : afterEnd ? N : todayIdx + 1;
+    $("st-day-k").textContent = beforeStart ? "距離開始" : "第幾天";
+    if (beforeStart) {
+      var diff = Math.round((START - new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())) / 864e5);
+      $("st-day").innerHTML = diff + " <small>天</small>";
+    } else {
+      $("st-day").innerHTML = elapsed + " <small>/ " + N + "</small>";
+    }
+    $("st-day-bar").style.width = (elapsed / N * 100) + "%";
+    var upto = beforeStart ? 0 : afterEnd ? N : todayIdx + 1, sum = 0;
+    for (var i = 0; i < upto; i++) sum += dayScore(i);
+    var rate = upto ? Math.round(sum / upto * 100) : 0;
+    $("st-rate").innerHTML = upto ? rate + "<small>%</small>" : "— <small>未開始</small>";
+    $("st-rate-bar").style.width = rate + "%";
+    var tc = trainCount();
+    $("st-train").innerHTML = tc + " <small>次</small>";
+    $("st-train-bar").style.width = Math.min(100, tc / 50 * 100) + "%";
+    var ch = codeHours();
+    $("st-code").innerHTML = (Math.round(ch * 10) / 10) + " <small>h</small>";
+    $("st-code-bar").style.width = Math.min(100, ch / 50 * 100) + "%";
+  }
+  function renderDay() {
+    var i = sel, w = weekOfIdx(i), wd = i % 7, ph = phaseOf(w), date = DAYS[i];
+    $("dayTitle").textContent = md(date) + "（" + WD[wd] + "）";
+    $("daySub").textContent = "W" + w + " · 第 " + (i + 1) + " 天" + (wk(w).exam ? " · 考試週減量版" : "");
+    $("prev").disabled = i === 0;
+    $("next").disabled = i === N - 1;
+    var nt = $("dayNotice");
+    if (beforeStart && i === 0) { nt.hidden = false; nt.textContent = "10/12 正式開始。這兩天先做準備：量體重和大腿圍、拍體態與臉部照、存穿搭參考圖、寫交易規則書。"; }
+    else if (todayIdx >= 0 && i > todayIdx) { nt.hidden = false; nt.textContent = "這天還沒到，可以先看要做什麼。"; }
+    else nt.hidden = true;
+    var rec = wk(w).days[date] || {};
+    var ul = $("checks"); ul.innerHTML = "";
+    itemsFor(i).forEach(function (x, n) {
+      var li = document.createElement("li");
+      var id = "c-" + x.k;
+      li.innerHTML = '<label for="' + id + '"><input type="checkbox" id="' + id + '"><span class="body"><span class="t"></span><br><span class="sub"></span></span><span class="tag"></span></label>';
+      var cb = li.querySelector("input");
+      cb.checked = !!rec[x.k];
+      li.querySelector(".t").textContent = x.t + (x.opt ? "（可選）" : "");
+      li.querySelector(".sub").textContent = x.s;
+      li.querySelector(".tag").textContent = x.tag;
+      cb.addEventListener("change", function () { toggle(i, x.k, cb.checked); });
+      ul.appendChild(li);
+    });
+    var p = dayScore(i);
+    $("dayPct").textContent = "今天完成 " + Math.round(p * 100) + "%";
+    $("dayPhase").textContent = ["", "P1 打底", "P2 推進", "P3 收尾"][ph];
+    var f = FOCUS[w] || [], dl = $("weekFocus"); dl.innerHTML = "";
+    var h = document.createElement("dt"); h.textContent = "W" + w + " 本週重點 · " + md(DAYS[(w - 1) * 7]) + "–" + md(DAYS[Math.min(N - 1, w * 7 - 1)]); h.style.color = "var(--ink)"; h.style.fontFamily = "var(--f-display)"; h.style.fontSize = "15px"; h.style.letterSpacing = "0";
+    dl.appendChild(h);
+    f.forEach(function (t, n) { var dt = document.createElement("dt"); dt.textContent = FOCUS_K[n]; var dd = document.createElement("dd"); dd.textContent = t; dl.appendChild(dt); dl.appendChild(dd); });
+  }
+  function renderHeat() {
+    var el = $("heat"); el.innerHTML = "<span></span>";
+    WD.forEach(function (x) { var s = document.createElement("span"); s.className = "hd"; s.textContent = x; el.appendChild(s); });
+    for (var w = 1; w <= WEEKS; w++) {
+      var lab = document.createElement("span"); lab.className = "wk" + (wk(w).exam ? " exam" : ""); lab.textContent = "W" + w; el.appendChild(lab);
+      for (var wd = 0; wd < 7; wd++) {
+        var i = (w - 1) * 7 + wd;
+        if (i >= N) { el.appendChild(document.createElement("span")); continue; }
+        var b = document.createElement("button");
+        b.setAttribute("data-l", level(dayScore(i)));
+        b.setAttribute("aria-label", md(DAYS[i]) + " 完成 " + Math.round(dayScore(i) * 100) + "%");
+        b.title = md(DAYS[i]);
+        if (i === sel) b.className = "sel";
+        if ((todayIdx >= 0 && i > todayIdx) || beforeStart) b.className += " future";
+        (function (ii) { b.addEventListener("click", function () { sel = ii; renderDay(); renderHeat(); }); })(i);
+        el.appendChild(b);
+      }
+    }
+  }
+  var FIELDS = [["weight", "體重 7 日均（kg）"], ["squat", "深蹲最佳組（kg×次）"], ["rule", "規則遵守（%）"], ["hours", "程式時數（h）"], ["pages", "閱讀頁數"]];
+  function renderWeeks() {
+    var box = $("weeks"); box.innerHTML = "";
+    var curW = todayIdx >= 0 ? weekOfIdx(todayIdx) : (beforeStart ? 1 : WEEKS);
+    for (var w = 1; w <= WEEKS; w++) {
+      (function (w) {
+        var s = wk(w), first = (w - 1) * 7, last = Math.min(N - 1, w * 7 - 1);
+        var sum = 0; for (var i = first; i <= last; i++) sum += dayScore(i);
+        var card = document.createElement("div"); card.className = "wcard" + (w === curW ? " cur" : "");
+        card.innerHTML = '<div class="wtop"><h3>W' + w + ' <span class="mono muted" style="font-size:13px;font-weight:400">' + md(DAYS[first]) + '–' + md(DAYS[last]) + ' · P' + phaseOf(w) + '</span></h3>' +
+          '<div class="r"><span class="mono">完成 ' + Math.round(sum / (last - first + 1) * 100) + '%</span><label class="exam-toggle" for="exam-' + w + '"><input type="checkbox" id="exam-' + w + '"> 考試週</label></div></div>' +
+          '<div class="fields"></div><label class="reviewlbl" for="note-' + w + '">一句話復盤<textarea id="note-' + w + '" rows="2" placeholder="這週最重要的一件事、下週只改一件事"></textarea></label>';
+        var ex = card.querySelector("#exam-" + w); ex.checked = !!s.exam;
+        ex.addEventListener("change", function () { wk(w).exam = ex.checked; commit(w); renderAll(); });
+        var fl = card.querySelector(".fields");
+        FIELDS.forEach(function (f) {
+          var l = document.createElement("label"); l.setAttribute("for", "f-" + f[0] + "-" + w); l.textContent = f[1];
+          var inp = document.createElement("input"); inp.id = "f-" + f[0] + "-" + w; inp.value = s.m[f[0]] || "";
+          inp.inputMode = f[0] === "squat" ? "text" : "decimal";
+          inp.addEventListener("change", function () { wk(w).m[f[0]] = inp.value.trim(); commit(w); renderStats(); });
+          l.appendChild(inp); fl.appendChild(l);
+        });
+        var ta = card.querySelector("#note-" + w); ta.value = s.m.note || "";
+        ta.addEventListener("change", function () { wk(w).m.note = ta.value; commit(w); });
+        box.appendChild(card);
+      })(w);
+    }
+  }
+  function renderAll() { renderStats(); renderDay(); renderHeat(); if (!$("panel-weeks").hidden) renderWeeks(); }
+
+  function toggle(i, k, v) {
+    var w = weekOfIdx(i), s = wk(w), date = DAYS[i];
+    if (!s.days[date]) s.days[date] = {};
+    if (v) s.days[date][k] = true; else delete s.days[date][k];
+    commit(w);
+    renderStats(); renderHeat();
+    $("dayPct").textContent = "今天完成 " + Math.round(dayScore(i) * 100) + "%";
+  }
+
+  // ---- persistence (db per viewer, localStorage fallback) ----
+  var db = null, base = null, dirty = {}, timers = {}, chain = {};
+  function setSync(t) { $("sync").textContent = t; }
+  function commit(w) {
+    lsSave();
+    if (!db) return;
+    var k = wid(w); dirty[k] = true;
+    clearTimeout(timers[k]);
+    timers[k] = setTimeout(function () {
+      var body = JSON.parse(JSON.stringify(state[k]));
+      setSync("儲存中…");
+      chain[k] = (chain[k] || Promise.resolve()).then(function () {
+        return db.collection(base).doc(k).set(body);
+      }).then(function () { delete dirty[k]; setSync("已同步到你的帳號"); }, function (e) {
+        delete dirty[k];
+        setSync(e && e.code === "permission_denied" ? "沒有寫入權限，紀錄只存在這台裝置" : "同步失敗，已存在這台裝置，稍後再試");
+      });
+    }, 400);
+  }
+  function tabs() {
+    document.querySelectorAll("nav.tabs button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = b.getAttribute("data-tab");
+        document.querySelectorAll("nav.tabs button").forEach(function (x) { x.setAttribute("aria-selected", String(x === b)); });
+        ["today", "plan", "weeks"].forEach(function (p) { $("panel-" + p).hidden = p !== t; });
+        if (t === "weeks") renderWeeks();
+        try { localStorage.setItem(LS + "-tab", t); } catch (e) {}
+      });
+    });
+    try { var t = localStorage.getItem(LS + "-tab"); if (t) { var b = document.querySelector('nav.tabs button[data-tab="' + t + '"]'); if (b) b.click(); } } catch (e) {}
+  }
+  $("prev").addEventListener("click", function () { if (sel > 0) { sel--; renderDay(); renderHeat(); } });
+  $("next").addEventListener("click", function () { if (sel < N - 1) { sel++; renderDay(); renderHeat(); } });
+  tabs();
+  renderAll();
+
+  async function connect() {
+    if (!window.claude || !window.claude.use) return;
+    try {
+      var dbx = await window.claude.use("db");
+      var user = await window.claude.use("user");
+      if (!dbx || !user) return;
+      var id = await user.id();
+      if (!id) { setSync("未登入，紀錄只存在這台裝置"); return; }
+      db = dbx; base = "data/users/" + id;
+      setSync("連線中…");
+      var first = true;
+      db.collection(base).onSnapshot(function (snap) {
+        var had = {};
+        snap.docs.forEach(function (doc) {
+          had[doc.id] = true;
+          if (dirty[doc.id]) return;
+          state[doc.id] = JSON.parse(JSON.stringify(doc.data() || {}));
+        });
+        if (first) {
+          first = false;
+          // upload anything that only exists locally (e.g. checked before sign-in)
+          Object.keys(state).forEach(function (k) { if (!had[k] && /^w\d\d$/.test(k)) commit(+k.slice(1)); });
+        }
+        lsSave();
+        setSync("已同步到你的帳號");
+        var focusId = document.activeElement && document.activeElement.id;
+        if (!(focusId && /^(f-|note-)/.test(focusId))) renderAll(); else { renderStats(); renderHeat(); }
+      }, function (e) { setSync("同步中斷，紀錄先存在這台裝置"); });
+    } catch (e) { setSync("紀錄只存在這台裝置"); }
+  }
+  connect();
+})();
+</script>
+</body>
+</html>
